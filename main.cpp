@@ -17,6 +17,7 @@
 #include <string>
 #include <time.h>
 #include <thread>
+#include <unordered_map>
 
 #include <json/json.h>
 
@@ -35,6 +36,7 @@ static bool _sWaitForExit = true;
 static string _sSelectedPlayer = "";
 static vector<string> _sPlayers;
 static mutex _sMutex;
+static unordered_map<unsigned int, int> _sFrameIndexes;
 
 const float MATH_PI = 3.14159f;
 
@@ -61,6 +63,7 @@ void HandleInputSelectPlayer();
 void Init();
 int main();
 void PrintLegend();
+void QueueAnimation(unsigned int index);
 void ReadConfig();
 void SetKeyColor(int* colors, int rzkey, int color);
 void SetKeyColorRGB(int* colors, int rzkey, int red, int green, int blue);
@@ -226,6 +229,11 @@ void GetServerPlayers()
 	}
 }
 
+void QueueAnimation(unsigned int index)
+{
+	_sFrameIndexes[index] = 0; // start
+}
+
 void GetServerPlayer()
 {
 	while (_sWaitForExit)
@@ -290,33 +298,42 @@ void GetServerPlayer()
 							cout << "Player Event: event=" << dataEvent << endl;
 							if (!strcmp(dataEvent.c_str(), "OnPlayerAttack"))
 							{
+								QueueAnimation(1);
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnActiveItemChanged"))
 							{
+								QueueAnimation(2);
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnMessagePlayer"))
 							{
 								if (!strcmp(dataMessage.c_str(), "Can't afford to place!"))
 								{
+									QueueAnimation(3);
 								}
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnMeleeThrown"))
 							{
+								QueueAnimation(4);
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnPlayerJump"))
 							{
+								QueueAnimation(5);
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnPlayerDuck"))
 							{
+								QueueAnimation(6);
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnPlayerSprint"))
 							{
+								QueueAnimation(7);
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnPlayerConnected"))
 							{
+								QueueAnimation(8);
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnPlayerDeath"))
 							{
+								QueueAnimation(9);
 							}
 						}
 					}
@@ -409,6 +426,15 @@ void GameLoop()
 
 		// start with a blank frame
 		memset(colors, 0, sizeof(int) * size);
+
+		// blend active animations
+		for (pair<const unsigned int, int> x : _sFrameIndexes)
+		{
+			if (x.second >= 0)
+			{
+
+			}
+		}
 
 		/*
 		// add rainbow colors
