@@ -1548,16 +1548,6 @@ void HandleInput()
 		case 'S':
 			HandleInputSelectPlayer();
 			break;
-		/*
-		case 'r':
-		case 'R':
-			_sFrameRainbow = 0; //start
-			break;
-		case 's':
-		case 'S':
-			_sFrameSpiral = 0; //start
-			break;
-		*/
 		}
 		Sleep(0);
 	}
