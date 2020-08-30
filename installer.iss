@@ -18,5 +18,13 @@ InfoBeforeFile=LICENSE
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Files]
-Source: "Release\Cpp_RustChromaModClient.exe"; DestDir: "{userappdata}\RustChromaModClient"; CopyMode: alwaysoverwrite
+Source: "Release\Cpp_RustChromaModClient.exe"; DestDir: "{userappdata}\RustChromaModClient\Cpp_RustChromaModClient.exe"; CopyMode: alwaysoverwrite
 Source: "Animations\*.chroma"; DestDir: "{userappdata}\RustChromaModClient\Animations"; CopyMode: alwaysoverwrite
+
+[Icons]
+Name: "{group}\Rust Chroma Mod Client"; Filename: "{userappdata}\RustChromaModClient\Cpp_RustChromaModClient.exe"; WorkingDir: "{userappdata}\RustChromaModClient";
+Name: "{commondesktop}\Rust Chroma Mod Client"; Filename: "{userappdata}\RustChromaModClient\Cpp_RustChromaModClient.exe"; WorkingDir: "{userappdata}\RustChromaModClient";
+Name: "{group}\Uninstall Rust Chroma Mod Client"; Filename: "{uninstallexe}"
+
+[Run]
+Filename: "{userappdata}\RustChromaModClient\Cpp_RustChromaModClient.exe"; Description: "Launch Rust Chroma Mod Client"; Flags: postinstall skipifsilent runascurrentuser nowait; Parameters: "{userdesktop}\temp.chroma"; WorkingDir: "{userappdata}\RustChromaModClient"
