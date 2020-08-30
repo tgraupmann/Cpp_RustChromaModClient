@@ -1271,13 +1271,47 @@ void SetupKeyboardHotkeys(int* colorsKeyboard)
 	gettimeofday(&tp, NULL);
 	long int ms = tp.tv_sec * 1000 + tp.tv_usec / 1000;
 
-	// Show hotkeys
-	SetKeyColorRGB(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_ESC, 255, 255, 0);
-	SetKeyColorRGB(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_W, 255, 0, 0);
-	SetKeyColorRGB(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_A, 255, 0, 0);
-	SetKeyColorRGB(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_S, 255, 0, 0);
-	SetKeyColorRGB(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_D, 255, 0, 0);
+	int color1 = ChromaAnimationAPI::GetRGB(255, 105, 20);
+	int color2 = ChromaAnimationAPI::GetRGB(64, 16, 0);
+	float t = fabsf(cos(MATH_PI / 2.0f + ms * 0.001f));
+	int color = ChromaAnimationAPI::LerpColor(color1, color2, t);
 
+	// Show hotkeys
+	SetKeyColor(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_W, color);
+	SetKeyColor(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_A, color);
+	SetKeyColor(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_S, color);
+	SetKeyColor(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_D, color);
+	SetKeyColor(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_LSHIFT, color);
+	SetKeyColor(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_LCTRL, color);
+	SetKeyColor(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_LALT, color);
+	SetKeyColor(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_SPACE, color);
+
+	color1 = ChromaAnimationAPI::GetRGB(0, 48, 48);
+	color2 = ChromaAnimationAPI::GetRGB(0, 255, 255);
+	color = ChromaAnimationAPI::LerpColor(color1, color2, t);
+	SetKeyColor(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_F1, color);
+	SetKeyColor(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_G, color);
+
+	color1 = ChromaAnimationAPI::GetRGB(0, 92, 0);
+	color2 = ChromaAnimationAPI::GetRGB(0, 255, 0);
+	color = ChromaAnimationAPI::LerpColor(color1, color2, t);
+	SetKeyColor(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_E, color);
+	SetKeyColor(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_N, color);
+
+	color1 = ChromaAnimationAPI::GetRGB(255, 255, 255);
+	color2 = ChromaAnimationAPI::GetRGB(48, 48, 48);
+	color = ChromaAnimationAPI::LerpColor(color1, color2, t);
+	SetKeyColor(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_1, color);
+	SetKeyColor(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_2, color);
+	SetKeyColor(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_3, color);
+	SetKeyColor(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_4, color);
+	SetKeyColor(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_5, color);
+	SetKeyColor(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_6, color);
+
+	color = ChromaAnimationAPI::GetRGB(255, 0, 0);
+	SetKeyColor(colorsKeyboard, (int)Keyboard::RZKEY_V, color);
+
+	/*
 	// SHow health animation
 	{
 		int keys[] = {
@@ -1333,6 +1367,7 @@ void SetupKeyboardHotkeys(int* colorsKeyboard)
 			SetKeyColor(colorsKeyboard, key, color);
 		}
 	}
+	*/
 }
 
 void GameLoop()
