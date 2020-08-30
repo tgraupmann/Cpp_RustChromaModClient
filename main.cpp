@@ -504,6 +504,21 @@ void HandleInputPort()
 	PrintLegend();
 }
 
+void HandleInputPlayer()
+{
+	lock_guard<mutex> guard(_sMutex);
+	system("CLS");
+	cout << "Type in PLAYER and press enter: ";
+	string val;
+	cin >> val;
+	if (!val.empty())
+	{
+		_sSelectedPlayer = val;
+		WriteConfig();
+	}
+	PrintLegend();
+}
+
 int GetSelectedPlayerIndex()
 {
 	for (unsigned int i = 0; i < _sPlayers.size(); ++i)
@@ -534,6 +549,10 @@ void HandleInput()
 		case 'P':
 		case 'p':
 			HandleInputPort();
+			break;
+		case 'E':
+		case 'e':
+			HandleInputPlayer();
 			break;
 		case 's':
 		case 'S':
@@ -577,11 +596,13 @@ void PrintLegend()
 	cout << "C++ RUST CHROMA MOD CLIENT" << endl;
 	cout << "HOST: " << _sServerHost << endl;
 	cout << "PORT: " << _sServerPort << endl;
+	cout << "PLAYER: " << _sSelectedPlayer << endl;
 	cout << endl;
 	cout << "Press `ESC` to quit." << endl;
 	cout << "Press `H` to change host." << endl;
 	cout << "Press `P` to change port." << endl;
 	cout << "Press `S` to select player." << endl;
+	cout << "Press `E` to enter player name." << endl;
 	cout << endl;
 	cout << "PLAYERS:" << endl;
 	for (unsigned int i = 0; i < _sPlayers.size(); ++i)
