@@ -1192,7 +1192,7 @@ void BlendAnimation2D(const pair<const unsigned int, int>& pair, EChromaSDKDevic
 	if (frameId < frameCount)
 	{
 		ChromaAnimationAPI::SetCurrentFrameName(animationName, frameId);
-		cout << animationName << ": " << (1 + ChromaAnimationAPI::GetCurrentFrameName(animationName)) << " of " << frameCount << endl;
+		//cout << animationName << ": " << (1 + ChromaAnimationAPI::GetCurrentFrameName(animationName)) << " of " << frameCount << endl;
 		float duration;
 		int animationId = ChromaAnimationAPI::GetAnimation(animationName);
 		ChromaAnimationAPI::GetFrame(animationId, frameId, &duration, tempColors, size);
