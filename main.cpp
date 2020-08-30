@@ -122,6 +122,10 @@ void ReadConfig()
 			{
 				_sServerPort = val;
 			}
+			else if (!strcmp(name.asCString(), "player"))
+			{
+				_sSelectedPlayer = val;
+			}
 		}
 	}
 }
@@ -137,6 +141,7 @@ void WriteConfig()
 	Json::Value json;
 	json["host"] = _sServerHost;
 	json["port"] = _sServerPort;
+	json["player"] = _sSelectedPlayer;
 
 	Json::FastWriter fastWriter;
 	std::string strJson = fastWriter.write(json);
