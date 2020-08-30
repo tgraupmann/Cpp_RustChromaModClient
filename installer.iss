@@ -18,8 +18,9 @@ InfoBeforeFile=LICENSE
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Files]
-Source: "Release\Cpp_RustChromaModClient.exe"; DestDir: "{userappdata}\RustChromaModClient\Cpp_RustChromaModClient.exe"; CopyMode: alwaysoverwrite
+Source: "Release\Cpp_RustChromaModClient.exe"; DestDir: "{userappdata}\RustChromaModClient"; CopyMode: alwaysoverwrite
 Source: "Animations\*.chroma"; DestDir: "{userappdata}\RustChromaModClient\Animations"; CopyMode: alwaysoverwrite
+Source: "CChromaEditorLibrary.dll"; DestDir: "{userappdata}\RustChromaModClient"; CopyMode: alwaysoverwrite
 
 [Icons]
 Name: "{group}\Rust Chroma Mod Client"; Filename: "{userappdata}\RustChromaModClient\Cpp_RustChromaModClient.exe"; WorkingDir: "{userappdata}\RustChromaModClient";
