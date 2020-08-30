@@ -256,7 +256,13 @@ void GetServerPlayer()
 				url += ":";
 				url += _sServerPort;
 				url += "/player.json?player=";
-				url += _sSelectedPlayer.c_str();
+
+				char* encodedPlayer = curl_easy_escape(curl, _sSelectedPlayer.c_str(), _sSelectedPlayer.size());
+				if (encodedPlayer) {
+					url += encodedPlayer;
+					curl_free(encodedPlayer);
+				}
+
 				curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
 				curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1L);
 				curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 50L);
