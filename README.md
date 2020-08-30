@@ -12,7 +12,13 @@ This is the C++ RUST Chroma Mod Client.
 
 * Launch the server
 
-* Launch RUST from Steam and connect to the server
+* Launch the RUST game from Steam and connect to the server
+
+* Press `F1` on the main menu and enter the connect command in the console
+
+```
+client.connect <SERVER_IP_ADDRESS>:28015
+```
 
 * Run the `C++ RUST Chroma Mod Client`
 
