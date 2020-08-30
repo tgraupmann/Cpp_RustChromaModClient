@@ -25,7 +25,7 @@ typedef unsigned char byte;
 using namespace ChromaSDK;
 using namespace std;
 
-static string _sServerName = "localhost";
+static string _sServerHost = "localhost";
 static string _sServerPort = "5000";
 static bool _sWaitForExit = true;
 static string _sSelectedPlayer = "";
@@ -49,6 +49,7 @@ int GetKeyColorIndex(int row, int column);
 void HandleInput();
 void Init();
 int main();
+void PrintLegend();
 void SetKeyColor(int* colors, int rzkey, int color);
 void SetKeyColorRGB(int* colors, int rzkey, int red, int green, int blue);
 void SetupAnimations();
@@ -76,7 +77,7 @@ void GetServerPlayers()
 		auto curl = curl_easy_init();
 		if (curl) {
 			string url = "http://";
-			url += _sServerName;
+			url += _sServerHost;
 			url += ":";
 			url += _sServerPort;
 			url += "/players.json";
@@ -111,7 +112,7 @@ void GetServerPlayer()
 			auto curl = curl_easy_init();
 			if (curl) {
 				string url = "http://";
-				url += _sServerName;
+				url += _sServerHost;
 				url += ":";
 				url += _sServerPort;
 				url += "/player.json?player=";
@@ -364,6 +365,22 @@ void HandleInput()
 		case 27:
 			_sWaitForExit = false;
 			break;
+		case 'H':
+		case 'h':
+			system("CLS");
+			cout << "Type in SERVER HOST and press enter: ";
+			cin >> _sServerHost;
+			cout << endl << endl;
+			PrintLegend();
+			break;
+		case 'P':
+		case 'p':
+			system("CLS");
+			cout << "Type in SERVER PORT and press enter: ";
+			cin >> _sServerPort;
+			cout << endl << endl;
+			PrintLegend();
+			break;
 		/*
 		case 'r':
 		case 'R':
@@ -391,16 +408,11 @@ void Cleanup()
 	}
 }
 
-int main()
+void PrintLegend()
 {
-	thread threadPlayers(GetServerPlayers);
-	thread threadPlayer(GetServerPlayer);
-
-	Init();
-	SetupAnimations();
-	thread thread(GameLoop);
+	system("CLS");
 	cout << "C++ RUST CHROMA MOD CLIENT" << endl;
-	cout << "HOST: " << _sServerName << endl;
+	cout << "HOST: " << _sServerHost << endl;
 	cout << "PORT: " << _sServerPort << endl;
 	cout << endl;
 	cout << "Press `ESC` to quit." << endl;
@@ -409,6 +421,17 @@ int main()
 	cout << "Press `S` to select player." << endl;
 	cout << endl;
 	cout << "PLAYERS:" << endl;
+}
+
+int main()
+{
+	thread threadPlayers(GetServerPlayers);
+	thread threadPlayer(GetServerPlayer);
+
+	Init();
+	SetupAnimations();
+	thread thread(GameLoop);
+	PrintLegend();
 	HandleInput();
 	thread.join();
 	threadPlayers.join();
