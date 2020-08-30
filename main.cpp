@@ -1163,7 +1163,7 @@ void BlendAnimation1D(const pair<const unsigned int, int>& pair, EChromaSDKDevic
 	if (frameId < frameCount)
 	{
 		ChromaAnimationAPI::SetCurrentFrameName(animationName, frameId);
-		cout << animationName << ": " << (1 + ChromaAnimationAPI::GetCurrentFrameName(animationName)) << " of " << frameCount << endl;
+		//cout << animationName << ": " << (1 + ChromaAnimationAPI::GetCurrentFrameName(animationName)) << " of " << frameCount << endl;
 		float duration;
 		int animationId = ChromaAnimationAPI::GetAnimation(animationName);
 		ChromaAnimationAPI::GetFrame(animationId, frameId, &duration, tempColors, size);
@@ -1477,7 +1477,7 @@ int GetSelectedPlayerIndex()
 	for (unsigned int i = 0; i < _sPlayers.size(); ++i)
 	{
 		string player = _sPlayers[i];
-		if (!strcmp(player.c_str(), _sSelectedPlayer.c_str()))
+		if (!_stricmp(player.c_str(), _sSelectedPlayer.c_str()))
 		{
 			return i;
 		}
