@@ -52,7 +52,12 @@ const char* ANIMATION_FINAL_MOUSEPAD = "Dynamic\\Final_Mousepad.chroma";
 void Cleanup();
 void GameLoop();
 int GetKeyColorIndex(int row, int column);
+int GetSelectedPlayerIndex();
 void HandleInput();
+void HandleInputHost();
+void HandleInputPort();
+void HandleInputPlayer();
+void HandleInputSelectPlayer();
 void Init();
 int main();
 void PrintLegend();
@@ -252,6 +257,70 @@ void GetServerPlayer()
 				curl_easy_cleanup(curl);
 				curl_global_cleanup();
 				curl = NULL;
+
+				lock_guard<mutex> guard(_sMutex);
+
+				Json::Value root;
+				Json::Reader reader;
+				bool parsingSuccessful = reader.parse(response_string, root);
+				if (parsingSuccessful)
+				{
+					for (unsigned int i = 0; i < root.size(); ++i)
+					{
+						Json::Value evt = root[i];
+
+						string dataEvent = "";
+						string dataMessage = "";
+						for (Json::Value::const_iterator outer = evt.begin(); outer != evt.end(); ++outer)
+						{
+							Json::Value name = outer.key();
+							string val = evt[name.asCString()].asString();
+							if (!strcmp(name.asCString(), "event"))
+							{
+								dataEvent = val;
+							}
+							else if (!strcmp(name.asCString(), "message"))
+							{
+								dataMessage = val;
+							}
+						}
+
+						if (!dataEvent.empty())
+						{
+							cout << "Player Event: event=" << dataEvent << endl;
+							if (!strcmp(dataEvent.c_str(), "OnPlayerAttack"))
+							{
+							}
+							else if (!strcmp(dataEvent.c_str(), "OnActiveItemChanged"))
+							{
+							}
+							else if (!strcmp(dataEvent.c_str(), "OnMessagePlayer"))
+							{
+								if (!strcmp(dataMessage.c_str(), "Can't afford to place!"))
+								{
+								}
+							}
+							else if (!strcmp(dataEvent.c_str(), "OnMeleeThrown"))
+							{
+							}
+							else if (!strcmp(dataEvent.c_str(), "OnPlayerJump"))
+							{
+							}
+							else if (!strcmp(dataEvent.c_str(), "OnPlayerDuck"))
+							{
+							}
+							else if (!strcmp(dataEvent.c_str(), "OnPlayerSprint"))
+							{
+							}
+							else if (!strcmp(dataEvent.c_str(), "OnPlayerConnected"))
+							{
+							}
+							else if (!strcmp(dataEvent.c_str(), "OnPlayerDeath"))
+							{
+							}
+						}
+					}
+				}
 			}
 		}
 		Sleep(3000); //33 later
@@ -519,6 +588,17 @@ void HandleInputPlayer()
 	PrintLegend();
 }
 
+void HandleInputSelectPlayer()
+{
+	lock_guard<mutex> guard(_sMutex);
+	if (_sPlayers.size() > 0)
+	{
+		_sSelectedPlayer = _sPlayers[(GetSelectedPlayerIndex() + 1) % _sPlayers.size()];
+		WriteConfig();
+		PrintLegend();
+	}
+}
+
 int GetSelectedPlayerIndex()
 {
 	for (unsigned int i = 0; i < _sPlayers.size(); ++i)
@@ -556,12 +636,7 @@ void HandleInput()
 			break;
 		case 's':
 		case 'S':
-			if (_sPlayers.size() > 0)
-			{
-				_sSelectedPlayer = _sPlayers[(GetSelectedPlayerIndex() + 1) % _sPlayers.size()];
-				WriteConfig();
-				PrintLegend();
-			}
+			HandleInputSelectPlayer();
 			break;
 		/*
 		case 'r':
