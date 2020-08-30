@@ -348,7 +348,7 @@ void GetServerPlayer()
 				}
 			}
 		}
-		Sleep(3000); //33 later
+		Sleep(33); //33 later
 	}
 }
 
@@ -372,7 +372,7 @@ void Init()
 
 void SetupEvent(const char* baseLayer, int effectIndex)
 {
-	string animationName = "Animations\\Effect";
+	string animationName = "Event\\Effect";
 	animationName += to_string(effectIndex);
 
 	int deviceType = ChromaAnimationAPI::GetDeviceTypeName(baseLayer);
@@ -1229,7 +1229,7 @@ void BlendAnimations(int* colorsChromaLink, int* tempColorsChromaLink,
 			//iterate all device types
 			for (int d = (int)EChromaSDKDeviceEnum::DE_ChromaLink; d < (int)EChromaSDKDeviceEnum::DE_MAX; ++d)
 			{
-				string animationName = "Animations\\Effect";
+				string animationName = "Event\\Effect";
 				animationName += to_string(pair.first);
 
 				switch ((EChromaSDKDeviceEnum)d)
@@ -1308,7 +1308,9 @@ void SetupKeyboardHotkeys(int* colorsKeyboard)
 	SetKeyColor(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_5, color);
 	SetKeyColor(colorsKeyboard, (int)Keyboard::RZKEY::RZKEY_6, color);
 
-	color = ChromaAnimationAPI::GetRGB(255, 0, 0);
+	color1 = ChromaAnimationAPI::GetRGB(48, 0, 0);
+	color2 = ChromaAnimationAPI::GetRGB(255, 0, 0);
+	color = ChromaAnimationAPI::LerpColor(color1, color2, t);
 	SetKeyColor(colorsKeyboard, (int)Keyboard::RZKEY_V, color);
 
 	/*
