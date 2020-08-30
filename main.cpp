@@ -7,9 +7,12 @@
 #include <array>
 #include <chrono>
 #include <conio.h>
+#include <filesystem>
+#include <fstream>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <streambuf>
 #include <string>
 #include <time.h>
 #include <thread>
@@ -50,9 +53,99 @@ void HandleInput();
 void Init();
 int main();
 void PrintLegend();
+void ReadConfig();
 void SetKeyColor(int* colors, int rzkey, int color);
 void SetKeyColorRGB(int* colors, int rzkey, int red, int green, int blue);
 void SetupAnimations();
+void WriteConfig();
+
+string GetAppData()
+{
+	char* pValue;
+	size_t len;
+	errno_t err = _dupenv_s(&pValue, &len, "APPDATA");
+	if (err)
+	{
+		return "";
+	}
+	else
+	{
+		string result = pValue;
+		return result;
+	}
+}
+
+string GetConfigPath()
+{
+	string result = GetAppData();
+	result += "\\RustChromaModClient";
+	return result;
+}
+
+string GetConfigFilePath()
+{
+	string result = GetConfigPath();
+	result += "\\config.json";
+	return result;
+}
+
+void ReadConfig()
+{
+	string path = GetConfigPath();
+	if (!filesystem::exists(path))
+	{
+		filesystem::create_directories(path);
+	}
+
+	string configFilePath = GetConfigFilePath();
+	ifstream t(configFilePath);
+	string str((istreambuf_iterator<char>(t)), istreambuf_iterator<char>());
+	if (str.empty())
+	{
+		WriteConfig();
+	}
+	else
+	{
+		Json::Value root;
+		Json::Reader reader;
+		bool parsingSuccessful = reader.parse(str, root);
+
+		for (Json::Value::const_iterator outer = root.begin(); outer != root.end(); ++outer)
+		{
+			Json::Value name = outer.key();
+			string val = root[name.asCString()].asString();
+			if (!strcmp(name.asCString(), "host"))
+			{
+				_sServerHost = val;
+			}
+			else if (!strcmp(name.asCString(), "port"))
+			{
+				_sServerPort = val;
+			}
+		}
+	}
+}
+
+void WriteConfig()
+{
+	string path = GetConfigPath();
+	if (!filesystem::exists(path))
+	{
+		filesystem::create_directories(path);
+	}
+
+	Json::Value json;
+	json["host"] = _sServerHost;
+	json["port"] = _sServerPort;
+
+	Json::FastWriter fastWriter;
+	std::string strJson = fastWriter.write(json);
+
+	string configFilePath = GetConfigFilePath();
+	std::ofstream out(configFilePath);
+	out << strJson;
+	out.close();
+}
 
 size_t CurlWrite_CallbackFunc_StdString(void* contents, size_t size, size_t nmemb, string* s)
 {
@@ -360,6 +453,7 @@ void HandleInput()
 	while (_sWaitForExit)
 	{
 		int input = _getch();
+		string val;
 		switch (input)
 		{
 		case 27:
@@ -369,16 +463,24 @@ void HandleInput()
 		case 'h':
 			system("CLS");
 			cout << "Type in SERVER HOST and press enter: ";
-			cin >> _sServerHost;
-			cout << endl << endl;
+			cin >> val;
+			if (!val.empty())
+			{
+				_sServerHost = val;
+				WriteConfig();
+			}
 			PrintLegend();
 			break;
 		case 'P':
 		case 'p':
 			system("CLS");
 			cout << "Type in SERVER PORT and press enter: ";
-			cin >> _sServerPort;
-			cout << endl << endl;
+			cin >> val;
+			if (!val.empty())
+			{
+				_sServerPort = val;
+				WriteConfig();
+			}
 			PrintLegend();
 			break;
 		/*
@@ -425,6 +527,8 @@ void PrintLegend()
 
 int main()
 {
+	ReadConfig();
+
 	thread threadPlayers(GetServerPlayers);
 	thread threadPlayer(GetServerPlayer);
 

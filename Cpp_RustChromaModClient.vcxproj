@@ -89,11 +89,13 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>packages\jsoncpp-vc140-static-32_64.1.8.0\lib\native\include;packages\rmt_zlib.1.2.8.7\build\native\include;packages\rmt_curl.7.51.0\build\native\include\v140\Win32\Release\static</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>packages\rmt_curl.7.51.0\build\native\lib\v140\Win32\Release\static;packages\rmt_libssh2.1.8.0.0\build\native\lib\v140\Win32\Release\static;packages\rmt_openssl.1.1.0.3\build\native\lib\v140\Win32\Release\static;packages\rmt_zlib.1.2.8.7\build\native\lib\v140\Win32\Release\static;packages\jsoncpp-vc140-static-32_64.1.8.0\lib\native\libs\x86\static\Release</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>packages\rmt_curl.7.51.0\build\native\lib\v140\Win32\$(Configuration)\static;packages\rmt_libssh2.1.8.0.0\build\native\lib\v140\Win32\$(Configuration)\static;packages\rmt_openssl.1.1.0.3\build\native\lib\v140\Win32\$(Configuration)\static;packages\rmt_zlib.1.2.8.7\build\native\lib\v140\Win32\$(Configuration)\static;packages\jsoncpp-vc140-static-32_64.1.8.0\lib\native\libs\x86\static\$(Configuration)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -105,13 +107,15 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>packages\jsoncpp-vc140-static-32_64.1.8.0\lib\native\include;packages\rmt_zlib.1.2.8.7\build\native\include;packages\rmt_curl.7.51.0\build\native\include\v140\Win32\Release\static</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>packages\rmt_curl.7.51.0\build\native\lib\v140\Win32\Release\static;packages\rmt_libssh2.1.8.0.0\build\native\lib\v140\Win32\Release\static;packages\rmt_openssl.1.1.0.3\build\native\lib\v140\Win32\Release\static;packages\rmt_zlib.1.2.8.7\build\native\lib\v140\Win32\Release\static;packages\jsoncpp-vc140-static-32_64.1.8.0\lib\native\libs\x86\static\Release</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>packages\rmt_curl.7.51.0\build\native\lib\v140\Win32\$(Configuration)\static;packages\rmt_libssh2.1.8.0.0\build\native\lib\v140\Win32\$(Configuration)\static;packages\rmt_openssl.1.1.0.3\build\native\lib\v140\Win32\$(Configuration)\static;packages\rmt_zlib.1.2.8.7\build\native\lib\v140\Win32\$(Configuration)\static;packages\jsoncpp-vc140-static-32_64.1.8.0\lib\native\libs\x86\static\$(Configuration)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
