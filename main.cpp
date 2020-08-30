@@ -33,64 +33,70 @@ size_t CurlWrite_CallbackFunc_StdString(void* contents, size_t size, size_t nmem
     return newLength;
 }
 
-void DoHttpPost()
+void GetServerPlayers()
 {
-    CURL* curl;
-    CURLcode res;
-
-    /* In windows, this will init the winsock stuff */
-    curl_global_init(CURL_GLOBAL_ALL);
-
-    /* get a curl handle */
-    curl = curl_easy_init();
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    auto curl = curl_easy_init();
     if (curl) {
-        /* First set the URL that is about to receive our POST. This URL can
-           just as well be a https:// URL if that is what should receive the
-           data. */
         string url = "http://";
         url += _sServerName;
         url += ":";
         url += _sServerPort;
         url += "/players.json";
         curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-        // ignore SSL errors
-        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false);
-        //curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L); //uncomment to see verbose output
-        /* Now specify the POST data */
-        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, "name=daniel&project=curl");
+        curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1L);
+        curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 50L);
+        curl_easy_setopt(curl, CURLOPT_TCP_KEEPALIVE, 1L);
 
-        string content;
+        std::string response_string;
+        std::string header_string;
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, CurlWrite_CallbackFunc_StdString);
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &content);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response_string);
+        curl_easy_setopt(curl, CURLOPT_HEADERDATA, &header_string);
 
-        /* Perform the request, res will get the return code */
-        res = curl_easy_perform(curl);
-
-        cout << "Curl Response CURLE_OK: " << (res == CURLE_OK ? "YES" : "NO") << endl;
-
-        /* Check for errors */
-        if (res != CURLE_OK)
-        {
-            fprintf(stderr, "curl_easy_perform() failed: %s\n",
-                curl_easy_strerror(res));
-        }
-        else
-        {
-            cout << "CURL RESPONSE BEGIN:::" << endl;
-            cout << content;
-            cout << ":::CURL RESPONSE END" << endl;
-        }
-
-        /* always cleanup */
+        curl_easy_perform(curl);
+        cout << response_string;
         curl_easy_cleanup(curl);
+        curl_global_cleanup();
+        curl = NULL;
     }
-    curl_global_cleanup();
+}
+
+void GetServerPlayer(string selectedPlayer)
+{
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    auto curl = curl_easy_init();
+    if (curl) {
+        string url = "http://";
+        url += _sServerName;
+        url += ":";
+        url += _sServerPort;
+        url += "/player.json?player=";
+        url += selectedPlayer.c_str();
+        curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+        curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1L);
+        curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 50L);
+        curl_easy_setopt(curl, CURLOPT_TCP_KEEPALIVE, 1L);
+
+        std::string response_string;
+        std::string header_string;
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, CurlWrite_CallbackFunc_StdString);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response_string);
+        curl_easy_setopt(curl, CURLOPT_HEADERDATA, &header_string);
+
+        curl_easy_perform(curl);
+        cout << response_string;
+        curl_easy_cleanup(curl);
+        curl_global_cleanup();
+        curl = NULL;
+    }
 }
 
 
 int main()
 {
-    DoHttpPost();
+    GetServerPlayers();
+    GetServerPlayer("devinethang");
 }
 
 #ifdef _DEBUG
