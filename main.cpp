@@ -232,7 +232,7 @@ void GetServerPlayers()
 
 			PrintLegend();
 		}
-		Sleep(1000);
+		Sleep(3000); // Update the players every few second
 	}
 }
 
@@ -348,7 +348,7 @@ void GetServerPlayer()
 				}
 			}
 		}
-		Sleep(33); //33 later
+		Sleep(100); //Get the player events 10 times a second
 	}
 }
 
