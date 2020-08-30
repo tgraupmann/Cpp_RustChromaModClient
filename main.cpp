@@ -10,6 +10,7 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <mutex>
 #include <stdio.h>
 #include <stdlib.h>
 #include <streambuf>
@@ -32,6 +33,8 @@ static string _sServerHost = "localhost";
 static string _sServerPort = "5000";
 static bool _sWaitForExit = true;
 static string _sSelectedPlayer = "";
+static vector<string> _sPlayers;
+static mutex _sMutex;
 
 const float MATH_PI = 3.14159f;
 
@@ -195,6 +198,9 @@ void GetServerPlayers()
 			curl_easy_cleanup(curl);
 			curl_global_cleanup();
 			curl = NULL;
+
+			lock_guard<mutex> guard(_sMutex);
+			PrintLegend();
 		}
 		Sleep(1000);
 	}
@@ -453,12 +459,41 @@ void GameLoop()
 	delete[] tempColors;
 }
 
+void HandleInputHost()
+{
+	lock_guard<mutex> guard(_sMutex);
+	system("CLS");
+	cout << "Type in SERVER HOST and press enter: ";
+	string val;
+	cin >> val;
+	if (!val.empty())
+	{
+		_sServerHost = val;
+		WriteConfig();
+	}
+	PrintLegend();
+}
+
+void HandleInputPort()
+{
+	lock_guard<mutex> guard(_sMutex);
+	system("CLS");
+	cout << "Type in SERVER PORT and press enter: ";
+	string val;
+	cin >> val;
+	if (!val.empty())
+	{
+		_sServerPort = val;
+		WriteConfig();
+	}
+	PrintLegend();
+}
+
 void HandleInput()
 {
 	while (_sWaitForExit)
 	{
 		int input = _getch();
-		string val;
 		switch (input)
 		{
 		case 27:
@@ -466,27 +501,11 @@ void HandleInput()
 			break;
 		case 'H':
 		case 'h':
-			system("CLS");
-			cout << "Type in SERVER HOST and press enter: ";
-			cin >> val;
-			if (!val.empty())
-			{
-				_sServerHost = val;
-				WriteConfig();
-			}
-			PrintLegend();
+			HandleInputHost();
 			break;
 		case 'P':
 		case 'p':
-			system("CLS");
-			cout << "Type in SERVER PORT and press enter: ";
-			cin >> val;
-			if (!val.empty())
-			{
-				_sServerPort = val;
-				WriteConfig();
-			}
-			PrintLegend();
+			HandleInputPort();
 			break;
 		/*
 		case 'r':
