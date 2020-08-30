@@ -409,7 +409,7 @@ void SetupEvent(const char* baseLayer, int effectIndex)
 		break;
 	}
 
-	ChromaAnimationAPI::CopyAnimationName(baseLayer, baseLayer);
+	ChromaAnimationAPI::CopyAnimationName(baseLayer, animationName.c_str());
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 }
 
