@@ -112,22 +112,24 @@ void ReadConfig()
 		Json::Value root;
 		Json::Reader reader;
 		bool parsingSuccessful = reader.parse(str, root);
-
-		for (Json::Value::const_iterator outer = root.begin(); outer != root.end(); ++outer)
+		if (parsingSuccessful)
 		{
-			Json::Value name = outer.key();
-			string val = root[name.asCString()].asString();
-			if (!strcmp(name.asCString(), "host"))
+			for (Json::Value::const_iterator outer = root.begin(); outer != root.end(); ++outer)
 			{
-				_sServerHost = val;
-			}
-			else if (!strcmp(name.asCString(), "port"))
-			{
-				_sServerPort = val;
-			}
-			else if (!strcmp(name.asCString(), "player"))
-			{
-				_sSelectedPlayer = val;
+				Json::Value name = outer.key();
+				string val = root[name.asCString()].asString();
+				if (!strcmp(name.asCString(), "host"))
+				{
+					_sServerHost = val;
+				}
+				else if (!strcmp(name.asCString(), "port"))
+				{
+					_sServerPort = val;
+				}
+				else if (!strcmp(name.asCString(), "player"))
+				{
+					_sSelectedPlayer = val;
+				}
 			}
 		}
 	}
@@ -200,6 +202,19 @@ void GetServerPlayers()
 			curl = NULL;
 
 			lock_guard<mutex> guard(_sMutex);
+			_sPlayers.clear();
+
+			Json::Value root;
+			Json::Reader reader;
+			bool parsingSuccessful = reader.parse(response_string, root);
+			if (parsingSuccessful)
+			{
+				for (unsigned int i = 0; i < root.size(); ++i)
+				{
+					_sPlayers.push_back(root[i].asString());
+				}
+			}
+
 			PrintLegend();
 		}
 		Sleep(1000);
@@ -489,6 +504,19 @@ void HandleInputPort()
 	PrintLegend();
 }
 
+int GetSelectedPlayerIndex()
+{
+	for (unsigned int i = 0; i < _sPlayers.size(); ++i)
+	{
+		string player = _sPlayers[i];
+		if (!strcmp(player.c_str(), _sSelectedPlayer.c_str()))
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
 void HandleInput()
 {
 	while (_sWaitForExit)
@@ -506,6 +534,15 @@ void HandleInput()
 		case 'P':
 		case 'p':
 			HandleInputPort();
+			break;
+		case 's':
+		case 'S':
+			if (_sPlayers.size() > 0)
+			{
+				_sSelectedPlayer = _sPlayers[(GetSelectedPlayerIndex() + 1) % _sPlayers.size()];
+				WriteConfig();
+				PrintLegend();
+			}
 			break;
 		/*
 		case 'r':
@@ -547,6 +584,19 @@ void PrintLegend()
 	cout << "Press `S` to select player." << endl;
 	cout << endl;
 	cout << "PLAYERS:" << endl;
+	for (unsigned int i = 0; i < _sPlayers.size(); ++i)
+	{
+		string player = _sPlayers[i];
+		if (!strcmp(player.c_str(), _sSelectedPlayer.c_str()))
+		{
+			cout << "[" << player << "] ";
+		}
+		else
+		{
+			cout << player << " ";
+		}
+	}
+	cout << endl;
 }
 
 int main()
