@@ -1591,11 +1591,11 @@ void PrintLegend()
 		string player = _sPlayers[i];
 		if (!strcmp(player.c_str(), _sSelectedPlayer.c_str()))
 		{
-			cout << "[" << player << "] ";
+			cout << "  <" << player << ">   ";
 		}
 		else
 		{
-			cout << player << " ";
+			cout << "   " << player << "    ";
 		}
 	}
 	cout << endl;
