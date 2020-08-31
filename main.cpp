@@ -1217,6 +1217,30 @@ void BlendAnimation2D(const pair<const unsigned int, int>& pair, EChromaSDKDevic
 	}
 }
 
+void SetAmbientColor1D(EChromaSDKDevice1DEnum device, int* colors, int ambientColor)
+{
+	const int size = GetColorArraySize1D(device);
+	for (int i = 0; i < size; ++i)
+	{
+		if (colors[i] == 0)
+		{
+			colors[i] = ambientColor;
+		}
+	}
+}
+
+void SetAmbientColor2D(EChromaSDKDevice2DEnum device, int* colors, int ambientColor)
+{
+	const int size = GetColorArraySize2D(device);
+	for (int i = 0; i < size; ++i)
+	{
+		if (colors[i] == 0)
+		{
+			colors[i] = ambientColor;
+		}
+	}
+}
+
 
 void BlendAnimations(int* colorsChromaLink, int* tempColorsChromaLink,
 	int* colorsHeadset, int* tempColorsHeadset,
@@ -1378,6 +1402,41 @@ void SetupKeyboardHotkeys(int* colorsKeyboard)
 	*/
 }
 
+void SetAmbientColor(int ambientColor,
+	int* colorsChromaLink,
+	int* colorsHeadset,
+	int* colorsKeyboard,
+	int* colorsKeypad,
+	int* colorsMouse,
+	int* colorsMousepad)
+{
+	// Set ambient color
+	for (int d = (int)EChromaSDKDeviceEnum::DE_ChromaLink; d < (int)EChromaSDKDeviceEnum::DE_MAX; ++d)
+	{
+		switch ((EChromaSDKDeviceEnum)d)
+		{
+		case EChromaSDKDeviceEnum::DE_ChromaLink:
+			SetAmbientColor1D(EChromaSDKDevice1DEnum::DE_ChromaLink, colorsChromaLink, ambientColor);
+			break;
+		case EChromaSDKDeviceEnum::DE_Headset:
+			SetAmbientColor1D(EChromaSDKDevice1DEnum::DE_Headset, colorsHeadset, ambientColor);
+			break;
+		case EChromaSDKDeviceEnum::DE_Keyboard:
+			SetAmbientColor2D(EChromaSDKDevice2DEnum::DE_Keyboard, colorsKeyboard, ambientColor);
+			break;
+		case EChromaSDKDeviceEnum::DE_Keypad:
+			SetAmbientColor2D(EChromaSDKDevice2DEnum::DE_Keypad, colorsKeypad, ambientColor);
+			break;
+		case EChromaSDKDeviceEnum::DE_Mouse:
+			SetAmbientColor2D(EChromaSDKDevice2DEnum::DE_Mouse, colorsMouse, ambientColor);
+			break;
+		case EChromaSDKDeviceEnum::DE_Mousepad:
+			SetAmbientColor1D(EChromaSDKDevice1DEnum::DE_Mousepad, colorsMousepad, ambientColor);
+			break;
+		}
+	}
+}
+
 void GameLoop()
 {
 	const int sizeChromaLink = GetColorArraySize1D(EChromaSDKDevice1DEnum::DE_ChromaLink);
@@ -1408,6 +1467,8 @@ void GameLoop()
 	int animationIdMouse = ChromaAnimationAPI::GetAnimation(ANIMATION_FINAL_MOUSE);
 	int animationIdMousepad = ChromaAnimationAPI::GetAnimation(ANIMATION_FINAL_MOUSEPAD);
 
+	int ambientColor = ChromaAnimationAPI::GetRGB(4, 4, 2);
+
 	while (_sWaitForExit)
 	{
 		// start with a blank frame
@@ -1426,6 +1487,14 @@ void GameLoop()
 			colorsMousepad, tempColorsMousepad);
 
 		SetupKeyboardHotkeys(colorsKeyboard);		
+
+		SetAmbientColor(ambientColor,
+			colorsChromaLink,
+			colorsHeadset,
+			colorsKeyboard,
+			colorsKeypad,
+			colorsMouse,
+			colorsMousepad);
 
 		ChromaAnimationAPI::UpdateFrame(animationIdChromaLink, 0, 0.033f, colorsChromaLink, sizeChromaLink);
 		ChromaAnimationAPI::UpdateFrame(animationIdHeadset, 0, 0.033f, colorsHeadset, sizeHeadset);
@@ -1537,6 +1606,7 @@ void HandleInput()
 		{
 		case 27:
 			_sWaitForExit = false;
+			cout << "Exiting..." << endl;
 			break;
 		case 'H':
 		case 'h':
