@@ -37,7 +37,21 @@ static string _sSelectedPlayer = "";
 static vector<string> _sPlayers;
 static mutex _sPlayersMutex;
 static mutex _sPlayAnimationMutex;
-static unordered_map<unsigned int, int> _sFrameIndexes;
+class DeviceFrameIndex
+{
+public:
+	DeviceFrameIndex() {
+		_mFrameIndex[(int)EChromaSDKDeviceEnum::DE_ChromaLink] = -1;
+		_mFrameIndex[(int)EChromaSDKDeviceEnum::DE_Headset] = -1;
+		_mFrameIndex[(int)EChromaSDKDeviceEnum::DE_Keyboard] = -1;
+		_mFrameIndex[(int)EChromaSDKDeviceEnum::DE_Keypad] = -1;
+		_mFrameIndex[(int)EChromaSDKDeviceEnum::DE_Mouse] = -1;
+		_mFrameIndex[(int)EChromaSDKDeviceEnum::DE_Mousepad] = -1;
+	}
+	// Index corresponds to EChromaSDKDeviceEnum;
+	int _mFrameIndex[6];
+};
+static unordered_map<unsigned int, DeviceFrameIndex> _sFrameIndexes;
 
 const float MATH_PI = 3.14159f;
 
@@ -236,10 +250,17 @@ void GetServerPlayers()
 	}
 }
 
-void QueueAnimation(unsigned int index)
+void QueueAnimation(unsigned int effectIndex)
 {
 	lock_guard<mutex> guard(_sPlayAnimationMutex);
-	_sFrameIndexes[index] = 0; // start
+	DeviceFrameIndex deviceFrameIndex;
+	deviceFrameIndex._mFrameIndex[int(EChromaSDKDeviceEnum::DE_ChromaLink)] = 0;
+	deviceFrameIndex._mFrameIndex[int(EChromaSDKDeviceEnum::DE_Headset)] = 0;
+	deviceFrameIndex._mFrameIndex[int(EChromaSDKDeviceEnum::DE_Keyboard)] = 0;
+	deviceFrameIndex._mFrameIndex[int(EChromaSDKDeviceEnum::DE_Keypad)] = 0;
+	deviceFrameIndex._mFrameIndex[int(EChromaSDKDeviceEnum::DE_Mouse)] = 0;
+	deviceFrameIndex._mFrameIndex[int(EChromaSDKDeviceEnum::DE_Mousepad)] = 0;
+	_sFrameIndexes[effectIndex] = deviceFrameIndex; // start
 }
 
 void GetServerPlayer()
@@ -344,6 +365,10 @@ void GetServerPlayer()
 								QueueAnimation(7);
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnPlayerConnected"))
+							{
+								QueueAnimation(1);
+							}
+							else if (!strcmp(dataEvent.c_str(), "OnPlayerDisconnected"))
 							{
 								QueueAnimation(1);
 							}
@@ -2571,17 +2596,16 @@ const int GetColorArraySize2D(EChromaSDKDevice2DEnum device)
 	return maxRow * maxColumn;
 }
 
-void BlendAnimation1D(const pair<const unsigned int, int>& pair, EChromaSDKDevice1DEnum device, const char* animationName,
+void BlendAnimation1D(DeviceFrameIndex& deviceFrameIndex, int device, EChromaSDKDevice1DEnum device1d, const char* animationName,
 	int* colors, int* tempColors)
 {
-	const int size = GetColorArraySize1D(device);
-	const int effectIndex = pair.first;
-	const int frameId = pair.second;
+	const int size = GetColorArraySize1D(device1d);
+	const int frameId = deviceFrameIndex._mFrameIndex[device];
 	const int frameCount = ChromaAnimationAPI::GetFrameCountName(animationName);
 	if (frameId < frameCount)
 	{
 		ChromaAnimationAPI::SetCurrentFrameName(animationName, frameId);
-		//cout << animationName << ": " << (1 + ChromaAnimationAPI::GetCurrentFrameName(animationName)) << " of " << frameCount << endl;
+		cout << animationName << ": " << (1 + ChromaAnimationAPI::GetCurrentFrameName(animationName)) << " of " << frameCount << endl;
 		float duration;
 		int animationId = ChromaAnimationAPI::GetAnimation(animationName);
 		ChromaAnimationAPI::GetFrame(animationId, frameId, &duration, tempColors, size);
@@ -2592,25 +2616,24 @@ void BlendAnimation1D(const pair<const unsigned int, int>& pair, EChromaSDKDevic
 				colors[i] = tempColors[i];
 			}
 		}
-		_sFrameIndexes[effectIndex] = frameId + 1;
+		deviceFrameIndex._mFrameIndex[device] = frameId + 1;
 	}
 	else
 	{
-		_sFrameIndexes[effectIndex] = -1;
+		deviceFrameIndex._mFrameIndex[device] = -1;
 	}
 }
 
-void BlendAnimation2D(const pair<const unsigned int, int>& pair, EChromaSDKDevice2DEnum device, const char* animationName,
+void BlendAnimation2D(DeviceFrameIndex& deviceFrameIndex, int device, EChromaSDKDevice2DEnum device2D, const char* animationName,
 	int* colors, int* tempColors)
 {
-	const int size = GetColorArraySize2D(device);
-	const int effectIndex = pair.first;
-	const int frameId = pair.second;
+	const int size = GetColorArraySize2D(device2D);
+	const int frameId = deviceFrameIndex._mFrameIndex[device];
 	const int frameCount = ChromaAnimationAPI::GetFrameCountName(animationName);
 	if (frameId < frameCount)
 	{
 		ChromaAnimationAPI::SetCurrentFrameName(animationName, frameId);
-		//cout << animationName << ": " << (1 + ChromaAnimationAPI::GetCurrentFrameName(animationName)) << " of " << frameCount << endl;
+		cout << animationName << ": " << (1 + ChromaAnimationAPI::GetCurrentFrameName(animationName)) << " of " << frameCount << endl;
 		float duration;
 		int animationId = ChromaAnimationAPI::GetAnimation(animationName);
 		ChromaAnimationAPI::GetFrame(animationId, frameId, &duration, tempColors, size);
@@ -2621,11 +2644,11 @@ void BlendAnimation2D(const pair<const unsigned int, int>& pair, EChromaSDKDevic
 				colors[i] = tempColors[i];
 			}
 		}
-		_sFrameIndexes[effectIndex] = frameId + 1;
+		deviceFrameIndex._mFrameIndex[device] = frameId + 1;
 	}
 	else
 	{
-		_sFrameIndexes[effectIndex] = -1;
+		deviceFrameIndex._mFrameIndex[device] = -1;
 	}
 }
 
@@ -2664,12 +2687,14 @@ void BlendAnimations(int* colorsChromaLink, int* tempColorsChromaLink,
 	lock_guard<mutex> guard(_sPlayAnimationMutex);
 
 	// blend active animations
-	for (pair<const unsigned int, int> pair : _sFrameIndexes)
+	for (pair<const unsigned int, DeviceFrameIndex> pair : _sFrameIndexes)
 	{
-		if (pair.second >= 0)
+		DeviceFrameIndex deviceFrameIndex = pair.second;
+		
+		//iterate all device types
+		for (int d = (int)EChromaSDKDeviceEnum::DE_ChromaLink; d < (int)EChromaSDKDeviceEnum::DE_MAX; ++d)
 		{
-			//iterate all device types
-			for (int d = (int)EChromaSDKDeviceEnum::DE_ChromaLink; d < (int)EChromaSDKDeviceEnum::DE_MAX; ++d)
+			if (deviceFrameIndex._mFrameIndex[d] >= 0)
 			{
 				string animationName = "Event\\Effect";
 				animationName += to_string(pair.first);
@@ -2678,29 +2703,30 @@ void BlendAnimations(int* colorsChromaLink, int* tempColorsChromaLink,
 				{
 				case EChromaSDKDeviceEnum::DE_ChromaLink:
 					animationName += "_ChromaLink.chroma";
-					BlendAnimation1D(pair, EChromaSDKDevice1DEnum::DE_ChromaLink, animationName.c_str(), colorsChromaLink, tempColorsChromaLink);
+					BlendAnimation1D(deviceFrameIndex, d, EChromaSDKDevice1DEnum::DE_ChromaLink, animationName.c_str(), colorsChromaLink, tempColorsChromaLink);
 					break;
 				case EChromaSDKDeviceEnum::DE_Headset:
 					animationName += "_Headset.chroma";
-					BlendAnimation1D(pair, EChromaSDKDevice1DEnum::DE_Headset, animationName.c_str(), colorsHeadset, tempColorsHeadset);
+					BlendAnimation1D(deviceFrameIndex, d, EChromaSDKDevice1DEnum::DE_Headset, animationName.c_str(), colorsHeadset, tempColorsHeadset);
 					break;
 				case EChromaSDKDeviceEnum::DE_Keyboard:
 					animationName += "_Keyboard.chroma";
-					BlendAnimation2D(pair, EChromaSDKDevice2DEnum::DE_Keyboard, animationName.c_str(), colorsKeyboard, tempColorsKeyboard);
+					BlendAnimation2D(deviceFrameIndex, d, EChromaSDKDevice2DEnum::DE_Keyboard, animationName.c_str(), colorsKeyboard, tempColorsKeyboard);
 					break;
 				case EChromaSDKDeviceEnum::DE_Keypad:
 					animationName += "_Keypad.chroma";
-					BlendAnimation2D(pair, EChromaSDKDevice2DEnum::DE_Keypad, animationName.c_str(), colorsKeypad, tempColorsKeypad);
+					BlendAnimation2D(deviceFrameIndex, d, EChromaSDKDevice2DEnum::DE_Keypad, animationName.c_str(), colorsKeypad, tempColorsKeypad);
 					break;
 				case EChromaSDKDeviceEnum::DE_Mouse:
 					animationName += "_Mouse.chroma";
-					BlendAnimation2D(pair, EChromaSDKDevice2DEnum::DE_Mouse, animationName.c_str(), colorsMouse, tempColorsMouse);
+					BlendAnimation2D(deviceFrameIndex, d, EChromaSDKDevice2DEnum::DE_Mouse, animationName.c_str(), colorsMouse, tempColorsMouse);
 					break;
 				case EChromaSDKDeviceEnum::DE_Mousepad:
 					animationName += "_Mousepad.chroma";
-					BlendAnimation1D(pair, EChromaSDKDevice1DEnum::DE_Mousepad, animationName.c_str(), colorsMousepad, tempColorsMousepad);
+					BlendAnimation1D(deviceFrameIndex, d, EChromaSDKDevice1DEnum::DE_Mousepad, animationName.c_str(), colorsMousepad, tempColorsMousepad);
 					break;
 				}
+				_sFrameIndexes[pair.first] = deviceFrameIndex;
 			}
 		}
 	}
