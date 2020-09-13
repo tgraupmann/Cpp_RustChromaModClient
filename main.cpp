@@ -244,6 +244,8 @@ void QueueAnimation(unsigned int index)
 
 void GetServerPlayer()
 {
+	QueueAnimation(1); //play title animation at the start
+
 	while (_sWaitForExit)
 	{
 		if (!_sSelectedPlayer.empty())
@@ -343,7 +345,7 @@ void GetServerPlayer()
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnPlayerConnected"))
 							{
-								QueueAnimation(8);
+								QueueAnimation(1);
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnPlayerDeath"))
 							{
@@ -423,7 +425,7 @@ void SetupEvent(const char* baseLayer, int effectIndex)
 void SetupEffect1Keyboard()
 {
 	const char* baseLayer = "Animations/Blank_Keyboard.chroma";
-	const char* layer2 = "animations/Title_Keyboard.chroma";
+	const char* layer2 = "Animations/Title_Keyboard.chroma";
 	const char* layer3 = "Animations/BlackAndWhiteRainbow_Keyboard.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
@@ -512,7 +514,7 @@ void SetupEffect1Keypad()
 }
 void SetupEffect2Keyboard()
 {
-	const char* baseLayer = "animations/Effect2_Keyboard.chroma";
+	const char* baseLayer = "Animations/Effect2_Keyboard.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(198, 227, 255);
@@ -526,7 +528,7 @@ void SetupEffect2Keyboard()
 }
 void SetupEffect2ChromaLink()
 {
-	const char* baseLayer = "animations/Effect2_ChromaLink.chroma";
+	const char* baseLayer = "Animations/Effect2_ChromaLink.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(198, 227, 255);
@@ -538,7 +540,7 @@ void SetupEffect2ChromaLink()
 }
 void SetupEffect2Headset()
 {
-	const char* baseLayer = "animations/Effect2_Headset.chroma";
+	const char* baseLayer = "Animations/Effect2_Headset.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(198, 227, 255);
@@ -550,7 +552,7 @@ void SetupEffect2Headset()
 }
 void SetupEffect2Mousepad()
 {
-	const char* baseLayer = "animations/Effect2_Mousepad.chroma";
+	const char* baseLayer = "Animations/Effect2_Mousepad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(198, 227, 255);
@@ -562,7 +564,7 @@ void SetupEffect2Mousepad()
 }
 void SetupEffect2Mouse()
 {
-	const char* baseLayer = "animations/Effect2_Mouse.chroma";
+	const char* baseLayer = "Animations/Effect2_Mouse.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(198, 227, 255);
@@ -574,7 +576,7 @@ void SetupEffect2Mouse()
 }
 void SetupEffect2Keypad()
 {
-	const char* baseLayer = "animations/Effect2_Keypad.chroma";
+	const char* baseLayer = "Animations/Effect2_Keypad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(198, 227, 255);
@@ -586,7 +588,7 @@ void SetupEffect2Keypad()
 }
 void SetupEffect3Keyboard()
 {
-	const char* baseLayer = "animations/Effect3_Keyboard.chroma";
+	const char* baseLayer = "Animations/Effect3_Keyboard.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	ChromaAnimationAPI::ReduceFramesName(baseLayer, 2);
@@ -601,7 +603,7 @@ void SetupEffect3Keyboard()
 }
 void SetupEffect3ChromaLink()
 {
-	const char* baseLayer = "animations/Effect3_ChromaLink.chroma";
+	const char* baseLayer = "Animations/Effect3_ChromaLink.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	ChromaAnimationAPI::ReduceFramesName(baseLayer, 2);
@@ -614,7 +616,7 @@ void SetupEffect3ChromaLink()
 }
 void SetupEffect3Headset()
 {
-	const char* baseLayer = "animations/Effect3_Headset.chroma";
+	const char* baseLayer = "Animations/Effect3_Headset.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	ChromaAnimationAPI::ReduceFramesName(baseLayer, 2);
@@ -627,7 +629,7 @@ void SetupEffect3Headset()
 }
 void SetupEffect3Mousepad()
 {
-	const char* baseLayer = "animations/Effect3_Mousepad.chroma";
+	const char* baseLayer = "Animations/Effect3_Mousepad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	ChromaAnimationAPI::ReduceFramesName(baseLayer, 2);
@@ -640,7 +642,7 @@ void SetupEffect3Mousepad()
 }
 void SetupEffect3Mouse()
 {
-	const char* baseLayer = "animations/Effect3_Mouse.chroma";
+	const char* baseLayer = "Animations/Effect3_Mouse.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	ChromaAnimationAPI::ReduceFramesName(baseLayer, 2);
@@ -653,7 +655,7 @@ void SetupEffect3Mouse()
 }
 void SetupEffect3Keypad()
 {
-	const char* baseLayer = "animations/Effect3_Keypad.chroma";
+	const char* baseLayer = "Animations/Effect3_Keypad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	ChromaAnimationAPI::ReduceFramesName(baseLayer, 2);
@@ -666,7 +668,7 @@ void SetupEffect3Keypad()
 }
 void SetupEffect4Keyboard()
 {
-	const char* baseLayer = "animations/Effect4_Keyboard.chroma";
+	const char* baseLayer = "Animations/Effect4_Keyboard.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(75, 6, 6);
@@ -680,7 +682,7 @@ void SetupEffect4Keyboard()
 }
 void SetupEffect4ChromaLink()
 {
-	const char* baseLayer = "animations/Effect4_ChromaLink.chroma";
+	const char* baseLayer = "Animations/Effect4_ChromaLink.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(75, 6, 6);
@@ -692,7 +694,7 @@ void SetupEffect4ChromaLink()
 }
 void SetupEffect4Headset()
 {
-	const char* baseLayer = "animations/Effect4_Headset.chroma";
+	const char* baseLayer = "Animations/Effect4_Headset.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(75, 6, 6);
@@ -704,7 +706,7 @@ void SetupEffect4Headset()
 }
 void SetupEffect4Mousepad()
 {
-	const char* baseLayer = "animations/Effect4_Mousepad.chroma";
+	const char* baseLayer = "Animations/Effect4_Mousepad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(75, 6, 6);
@@ -716,7 +718,7 @@ void SetupEffect4Mousepad()
 }
 void SetupEffect4Mouse()
 {
-	const char* baseLayer = "animations/Effect4_Mouse.chroma";
+	const char* baseLayer = "Animations/Effect4_Mouse.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(75, 6, 6);
@@ -728,7 +730,7 @@ void SetupEffect4Mouse()
 }
 void SetupEffect4Keypad()
 {
-	const char* baseLayer = "animations/Effect4_Keypad.chroma";
+	const char* baseLayer = "Animations/Effect4_Keypad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(75, 6, 6);
@@ -740,8 +742,8 @@ void SetupEffect4Keypad()
 }
 void SetupEffect5Keyboard()
 {
-	const char* baseLayer = "animations/Effect5_Keyboard.chroma";
-	const char* layer2 = "animations/RockMelee_Keyboard.chroma";
+	const char* baseLayer = "Animations/Effect5_Keyboard.chroma";
+	const char* layer2 = "Animations/RockMelee_Keyboard.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
@@ -760,8 +762,8 @@ void SetupEffect5Keyboard()
 }
 void SetupEffect5ChromaLink()
 {
-	const char* baseLayer = "animations/Effect5_ChromaLink.chroma";
-	const char* layer2 = "animations/RockMelee_ChromaLink.chroma";
+	const char* baseLayer = "Animations/Effect5_ChromaLink.chroma";
+	const char* layer2 = "Animations/RockMelee_ChromaLink.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
@@ -780,8 +782,8 @@ void SetupEffect5ChromaLink()
 }
 void SetupEffect5Headset()
 {
-	const char* baseLayer = "animations/Effect5_Headset.chroma";
-	const char* layer2 = "animations/RockMelee_Headset.chroma";
+	const char* baseLayer = "Animations/Effect5_Headset.chroma";
+	const char* layer2 = "Animations/RockMelee_Headset.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
@@ -800,8 +802,8 @@ void SetupEffect5Headset()
 }
 void SetupEffect5Mousepad()
 {
-	const char* baseLayer = "animations/Effect5_Mousepad.chroma";
-	const char* layer2 = "animations/RockMelee_Mousepad.chroma";
+	const char* baseLayer = "Animations/Effect5_Mousepad.chroma";
+	const char* layer2 = "Animations/RockMelee_Mousepad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
@@ -820,8 +822,8 @@ void SetupEffect5Mousepad()
 }
 void SetupEffect5Mouse()
 {
-	const char* baseLayer = "animations/Effect5_Mouse.chroma";
-	const char* layer2 = "animations/RockMelee_Mouse.chroma";
+	const char* baseLayer = "Animations/Effect5_Mouse.chroma";
+	const char* layer2 = "Animations/RockMelee_Mouse.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
@@ -840,8 +842,8 @@ void SetupEffect5Mouse()
 }
 void SetupEffect5Keypad()
 {
-	const char* baseLayer = "animations/Effect5_Keypad.chroma";
-	const char* layer2 = "animations/RockMelee_Keypad.chroma";
+	const char* baseLayer = "Animations/Effect5_Keypad.chroma";
+	const char* layer2 = "Animations/RockMelee_Keypad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
@@ -860,8 +862,8 @@ void SetupEffect5Keypad()
 }
 void SetupEffect6Keyboard()
 {
-	const char* baseLayer = "animations/Effect6_Keyboard.chroma";
-	const char* layer2 = "animations/RockMelee_Keyboard.chroma";
+	const char* baseLayer = "Animations/Effect6_Keyboard.chroma";
+	const char* layer2 = "Animations/RockMelee_Keyboard.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
@@ -880,8 +882,8 @@ void SetupEffect6Keyboard()
 }
 void SetupEffect6ChromaLink()
 {
-	const char* baseLayer = "animations/Effect6_ChromaLink.chroma";
-	const char* layer2 = "animations/RockMelee_ChromaLink.chroma";
+	const char* baseLayer = "Animations/Effect6_ChromaLink.chroma";
+	const char* layer2 = "Animations/RockMelee_ChromaLink.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
@@ -900,8 +902,8 @@ void SetupEffect6ChromaLink()
 }
 void SetupEffect6Headset()
 {
-	const char* baseLayer = "animations/Effect6_Headset.chroma";
-	const char* layer2 = "animations/RockMelee_Headset.chroma";
+	const char* baseLayer = "Animations/Effect6_Headset.chroma";
+	const char* layer2 = "Animations/RockMelee_Headset.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
@@ -920,8 +922,8 @@ void SetupEffect6Headset()
 }
 void SetupEffect6Mousepad()
 {
-	const char* baseLayer = "animations/Effect6_Mousepad.chroma";
-	const char* layer2 = "animations/RockMelee_Mousepad.chroma";
+	const char* baseLayer = "Animations/Effect6_Mousepad.chroma";
+	const char* layer2 = "Animations/RockMelee_Mousepad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
@@ -940,8 +942,8 @@ void SetupEffect6Mousepad()
 }
 void SetupEffect6Mouse()
 {
-	const char* baseLayer = "animations/Effect6_Mouse.chroma";
-	const char* layer2 = "animations/RockMelee_Mouse.chroma";
+	const char* baseLayer = "Animations/Effect6_Mouse.chroma";
+	const char* layer2 = "Animations/RockMelee_Mouse.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
@@ -960,8 +962,8 @@ void SetupEffect6Mouse()
 }
 void SetupEffect6Keypad()
 {
-	const char* baseLayer = "animations/Effect6_Keypad.chroma";
-	const char* layer2 = "animations/RockMelee_Keypad.chroma";
+	const char* baseLayer = "Animations/Effect6_Keypad.chroma";
+	const char* layer2 = "Animations/RockMelee_Keypad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
@@ -980,8 +982,8 @@ void SetupEffect6Keypad()
 }
 void SetupEffect7Keyboard()
 {
-	const char* baseLayer = "animations/Effect6_Keyboard.chroma";
-	const char* layer2 = "animations/Axe_Keyboard.chroma";
+	const char* baseLayer = "Animations/Effect6_Keyboard.chroma";
+	const char* layer2 = "Animations/Axe_Keyboard.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
@@ -1000,8 +1002,8 @@ void SetupEffect7Keyboard()
 }
 void SetupEffect7ChromaLink()
 {
-	const char* baseLayer = "animations/Effect6_ChromaLink.chroma";
-	const char* layer2 = "animations/Axe_ChromaLink.chroma";
+	const char* baseLayer = "Animations/Effect6_ChromaLink.chroma";
+	const char* layer2 = "Animations/Axe_ChromaLink.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
@@ -1020,8 +1022,8 @@ void SetupEffect7ChromaLink()
 }
 void SetupEffect7Headset()
 {
-	const char* baseLayer = "animations/Effect6_Headset.chroma";
-	const char* layer2 = "animations/Axe_Headset.chroma";
+	const char* baseLayer = "Animations/Effect6_Headset.chroma";
+	const char* layer2 = "Animations/Axe_Headset.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
@@ -1040,8 +1042,8 @@ void SetupEffect7Headset()
 }
 void SetupEffect7Mousepad()
 {
-	const char* baseLayer = "animations/Effect6_Mousepad.chroma";
-	const char* layer2 = "animations/Axe_Mousepad.chroma";
+	const char* baseLayer = "Animations/Effect6_Mousepad.chroma";
+	const char* layer2 = "Animations/Axe_Mousepad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
@@ -1060,8 +1062,8 @@ void SetupEffect7Mousepad()
 }
 void SetupEffect7Mouse()
 {
-	const char* baseLayer = "animations/Effect6_Mouse.chroma";
-	const char* layer2 = "animations/Axe_Mouse.chroma";
+	const char* baseLayer = "Animations/Effect6_Mouse.chroma";
+	const char* layer2 = "Animations/Axe_Mouse.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
@@ -1080,8 +1082,8 @@ void SetupEffect7Mouse()
 }
 void SetupEffect7Keypad()
 {
-	const char* baseLayer = "animations/Effect6_Keypad.chroma";
-	const char* layer2 = "animations/Axe_Keypad.chroma";
+	const char* baseLayer = "Animations/Effect6_Keypad.chroma";
+	const char* layer2 = "Animations/Axe_Keypad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
@@ -1100,8 +1102,8 @@ void SetupEffect7Keypad()
 }
 void SetupEffect8Keyboard()
 {
-	const char* baseLayer = "animations/Effect8_Keyboard.chroma";
-	const char* layer2 = "animations/Axe_Keyboard.chroma";
+	const char* baseLayer = "Animations/Effect8_Keyboard.chroma";
+	const char* layer2 = "Animations/Axe_Keyboard.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
@@ -1120,8 +1122,8 @@ void SetupEffect8Keyboard()
 }
 void SetupEffect8ChromaLink()
 {
-	const char* baseLayer = "animations/Effect8_ChromaLink.chroma";
-	const char* layer2 = "animations/Axe_ChromaLink.chroma";
+	const char* baseLayer = "Animations/Effect8_ChromaLink.chroma";
+	const char* layer2 = "Animations/Axe_ChromaLink.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
@@ -1140,8 +1142,8 @@ void SetupEffect8ChromaLink()
 }
 void SetupEffect8Headset()
 {
-	const char* baseLayer = "animations/Effect8_Headset.chroma";
-	const char* layer2 = "animations/Axe_Headset.chroma";
+	const char* baseLayer = "Animations/Effect8_Headset.chroma";
+	const char* layer2 = "Animations/Axe_Headset.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
@@ -1160,8 +1162,8 @@ void SetupEffect8Headset()
 }
 void SetupEffect8Mousepad()
 {
-	const char* baseLayer = "animations/Effect8_Mousepad.chroma";
-	const char* layer2 = "animations/Axe_Mousepad.chroma";
+	const char* baseLayer = "Animations/Effect8_Mousepad.chroma";
+	const char* layer2 = "Animations/Axe_Mousepad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
@@ -1180,8 +1182,8 @@ void SetupEffect8Mousepad()
 }
 void SetupEffect8Mouse()
 {
-	const char* baseLayer = "animations/Effect8_Mouse.chroma";
-	const char* layer2 = "animations/Axe_Mouse.chroma";
+	const char* baseLayer = "Animations/Effect8_Mouse.chroma";
+	const char* layer2 = "Animations/Axe_Mouse.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
@@ -1200,8 +1202,8 @@ void SetupEffect8Mouse()
 }
 void SetupEffect8Keypad()
 {
-	const char* baseLayer = "animations/Effect8_Keypad.chroma";
-	const char* layer2 = "animations/Axe_Keypad.chroma";
+	const char* baseLayer = "Animations/Effect8_Keypad.chroma";
+	const char* layer2 = "Animations/Axe_Keypad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::CloseAnimationName(layer2);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
@@ -1220,7 +1222,7 @@ void SetupEffect8Keypad()
 }
 void SetupEffect9Keyboard()
 {
-	const char* baseLayer = "animations/Effect9_Keyboard.chroma";
+	const char* baseLayer = "Animations/Effect9_Keyboard.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(255, 0, 0);
@@ -1234,7 +1236,7 @@ void SetupEffect9Keyboard()
 }
 void SetupEffect9ChromaLink()
 {
-	const char* baseLayer = "animations/Effect9_ChromaLink.chroma";
+	const char* baseLayer = "Animations/Effect9_ChromaLink.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(255, 0, 0);
@@ -1246,7 +1248,7 @@ void SetupEffect9ChromaLink()
 }
 void SetupEffect9Headset()
 {
-	const char* baseLayer = "animations/Effect9_Headset.chroma";
+	const char* baseLayer = "Animations/Effect9_Headset.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(255, 0, 0);
@@ -1258,7 +1260,7 @@ void SetupEffect9Headset()
 }
 void SetupEffect9Mousepad()
 {
-	const char* baseLayer = "animations/Effect9_Mousepad.chroma";
+	const char* baseLayer = "Animations/Effect9_Mousepad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(255, 0, 0);
@@ -1270,7 +1272,7 @@ void SetupEffect9Mousepad()
 }
 void SetupEffect9Mouse()
 {
-	const char* baseLayer = "animations/Effect9_Mouse.chroma";
+	const char* baseLayer = "Animations/Effect9_Mouse.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(255, 0, 0);
@@ -1282,7 +1284,7 @@ void SetupEffect9Mouse()
 }
 void SetupEffect9Keypad()
 {
-	const char* baseLayer = "animations/Effect9_Keypad.chroma";
+	const char* baseLayer = "Animations/Effect9_Keypad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(255, 0, 0);
@@ -1294,7 +1296,7 @@ void SetupEffect9Keypad()
 }
 void SetupEffect10Keyboard()
 {
-	const char* baseLayer = "animations/Effect10_Keyboard.chroma";
+	const char* baseLayer = "Animations/Effect10_Keyboard.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	ChromaAnimationAPI::ReduceFramesName(baseLayer, 2);
@@ -1309,7 +1311,7 @@ void SetupEffect10Keyboard()
 }
 void SetupEffect10ChromaLink()
 {
-	const char* baseLayer = "animations/Effect10_ChromaLink.chroma";
+	const char* baseLayer = "Animations/Effect10_ChromaLink.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	ChromaAnimationAPI::ReduceFramesName(baseLayer, 2);
@@ -1321,7 +1323,7 @@ void SetupEffect10ChromaLink()
 }
 void SetupEffect10Headset()
 {
-	const char* baseLayer = "animations/Effect10_Headset.chroma";
+	const char* baseLayer = "Animations/Effect10_Headset.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	ChromaAnimationAPI::ReduceFramesName(baseLayer, 2);
@@ -1333,7 +1335,7 @@ void SetupEffect10Headset()
 }
 void SetupEffect10Mousepad()
 {
-	const char* baseLayer = "animations/Effect10_Mousepad.chroma";
+	const char* baseLayer = "Animations/Effect10_Mousepad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	ChromaAnimationAPI::ReduceFramesName(baseLayer, 2);
@@ -1345,7 +1347,7 @@ void SetupEffect10Mousepad()
 }
 void SetupEffect10Mouse()
 {
-	const char* baseLayer = "animations/Effect10_Mouse.chroma";
+	const char* baseLayer = "Animations/Effect10_Mouse.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	ChromaAnimationAPI::ReduceFramesName(baseLayer, 2);
@@ -1357,7 +1359,7 @@ void SetupEffect10Mouse()
 }
 void SetupEffect10Keypad()
 {
-	const char* baseLayer = "animations/Effect10_Keypad.chroma";
+	const char* baseLayer = "Animations/Effect10_Keypad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	ChromaAnimationAPI::ReduceFramesName(baseLayer, 2);
@@ -1369,7 +1371,7 @@ void SetupEffect10Keypad()
 }
 void SetupEffect11Keyboard()
 {
-	const char* baseLayer = "animations/Effect11_Keyboard.chroma";
+	const char* baseLayer = "Animations/Effect11_Keyboard.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	ChromaAnimationAPI::ReduceFramesName(baseLayer, 2);
@@ -1384,7 +1386,7 @@ void SetupEffect11Keyboard()
 }
 void SetupEffect11ChromaLink()
 {
-	const char* baseLayer = "animations/Effect11_ChromaLink.chroma";
+	const char* baseLayer = "Animations/Effect11_ChromaLink.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	ChromaAnimationAPI::ReduceFramesName(baseLayer, 2);
@@ -1397,7 +1399,7 @@ void SetupEffect11ChromaLink()
 }
 void SetupEffect11Headset()
 {
-	const char* baseLayer = "animations/Effect11_Headset.chroma";
+	const char* baseLayer = "Animations/Effect11_Headset.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	ChromaAnimationAPI::ReduceFramesName(baseLayer, 2);
@@ -1410,7 +1412,7 @@ void SetupEffect11Headset()
 }
 void SetupEffect11Mousepad()
 {
-	const char* baseLayer = "animations/Effect11_Mousepad.chroma";
+	const char* baseLayer = "Animations/Effect11_Mousepad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	ChromaAnimationAPI::ReduceFramesName(baseLayer, 2);
@@ -1423,7 +1425,7 @@ void SetupEffect11Mousepad()
 }
 void SetupEffect11Mouse()
 {
-	const char* baseLayer = "animations/Effect11_Mouse.chroma";
+	const char* baseLayer = "Animations/Effect11_Mouse.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	ChromaAnimationAPI::ReduceFramesName(baseLayer, 2);
@@ -1436,7 +1438,7 @@ void SetupEffect11Mouse()
 }
 void SetupEffect11Keypad()
 {
-	const char* baseLayer = "animations/Effect11_Keypad.chroma";
+	const char* baseLayer = "Animations/Effect11_Keypad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	ChromaAnimationAPI::ReduceFramesName(baseLayer, 2);
@@ -1449,7 +1451,7 @@ void SetupEffect11Keypad()
 }
 void SetupEffect12Keyboard()
 {
-	const char* baseLayer = "animations/Effect12_Keyboard.chroma";
+	const char* baseLayer = "Animations/Effect12_Keyboard.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(103, 43, 20);
@@ -1462,7 +1464,7 @@ void SetupEffect12Keyboard()
 }
 void SetupEffect12ChromaLink()
 {
-	const char* baseLayer = "animations/Effect12_ChromaLink.chroma";
+	const char* baseLayer = "Animations/Effect12_ChromaLink.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(103, 43, 20);
@@ -1473,7 +1475,7 @@ void SetupEffect12ChromaLink()
 }
 void SetupEffect12Headset()
 {
-	const char* baseLayer = "animations/Effect12_Headset.chroma";
+	const char* baseLayer = "Animations/Effect12_Headset.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(103, 43, 20);
@@ -1484,7 +1486,7 @@ void SetupEffect12Headset()
 }
 void SetupEffect12Mousepad()
 {
-	const char* baseLayer = "animations/Effect12_Mousepad.chroma";
+	const char* baseLayer = "Animations/Effect12_Mousepad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(103, 43, 20);
@@ -1495,7 +1497,7 @@ void SetupEffect12Mousepad()
 }
 void SetupEffect12Mouse()
 {
-	const char* baseLayer = "animations/Effect12_Mouse.chroma";
+	const char* baseLayer = "Animations/Effect12_Mouse.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(103, 43, 20);
@@ -1506,7 +1508,7 @@ void SetupEffect12Mouse()
 }
 void SetupEffect12Keypad()
 {
-	const char* baseLayer = "animations/Effect12_Keypad.chroma";
+	const char* baseLayer = "Animations/Effect12_Keypad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(103, 43, 20);
@@ -1517,7 +1519,7 @@ void SetupEffect12Keypad()
 }
 void SetupEffect13Keyboard()
 {
-	const char* baseLayer = "animations/Effect13_Keyboard.chroma";
+	const char* baseLayer = "Animations/Effect13_Keyboard.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(71, 24, 24);
@@ -1530,7 +1532,7 @@ void SetupEffect13Keyboard()
 }
 void SetupEffect13ChromaLink()
 {
-	const char* baseLayer = "animations/Effect13_ChromaLink.chroma";
+	const char* baseLayer = "Animations/Effect13_ChromaLink.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(71, 24, 24);
@@ -1541,7 +1543,7 @@ void SetupEffect13ChromaLink()
 }
 void SetupEffect13Headset()
 {
-	const char* baseLayer = "animations/Effect13_Headset.chroma";
+	const char* baseLayer = "Animations/Effect13_Headset.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(71, 24, 24);
@@ -1552,7 +1554,7 @@ void SetupEffect13Headset()
 }
 void SetupEffect13Mousepad()
 {
-	const char* baseLayer = "animations/Effect13_Mousepad.chroma";
+	const char* baseLayer = "Animations/Effect13_Mousepad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(71, 24, 24);
@@ -1563,7 +1565,7 @@ void SetupEffect13Mousepad()
 }
 void SetupEffect13Mouse()
 {
-	const char* baseLayer = "animations/Effect13_Mouse.chroma";
+	const char* baseLayer = "Animations/Effect13_Mouse.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(71, 24, 24);
@@ -1574,7 +1576,7 @@ void SetupEffect13Mouse()
 }
 void SetupEffect13Keypad()
 {
-	const char* baseLayer = "animations/Effect13_Keypad.chroma";
+	const char* baseLayer = "Animations/Effect13_Keypad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(71, 24, 24);
@@ -1585,7 +1587,7 @@ void SetupEffect13Keypad()
 }
 void SetupEffect14Keyboard()
 {
-	const char* baseLayer = "animations/Effect14_Keyboard.chroma";
+	const char* baseLayer = "Animations/Effect14_Keyboard.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	ChromaAnimationAPI::ReduceFramesName(baseLayer, 2);
@@ -1599,7 +1601,7 @@ void SetupEffect14Keyboard()
 }
 void SetupEffect14ChromaLink()
 {
-	const char* baseLayer = "animations/Effect14_ChromaLink.chroma";
+	const char* baseLayer = "Animations/Effect14_ChromaLink.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	ChromaAnimationAPI::ReduceFramesName(baseLayer, 2);
@@ -1611,7 +1613,7 @@ void SetupEffect14ChromaLink()
 }
 void SetupEffect14Headset()
 {
-	const char* baseLayer = "animations/Effect14_Headset.chroma";
+	const char* baseLayer = "Animations/Effect14_Headset.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	ChromaAnimationAPI::ReduceFramesName(baseLayer, 2);
@@ -1623,7 +1625,7 @@ void SetupEffect14Headset()
 }
 void SetupEffect14Mousepad()
 {
-	const char* baseLayer = "animations/Effect14_Mousepad.chroma";
+	const char* baseLayer = "Animations/Effect14_Mousepad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	ChromaAnimationAPI::ReduceFramesName(baseLayer, 2);
@@ -1635,7 +1637,7 @@ void SetupEffect14Mousepad()
 }
 void SetupEffect14Mouse()
 {
-	const char* baseLayer = "animations/Effect14_Mouse.chroma";
+	const char* baseLayer = "Animations/Effect14_Mouse.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	ChromaAnimationAPI::ReduceFramesName(baseLayer, 2);
@@ -1647,7 +1649,7 @@ void SetupEffect14Mouse()
 }
 void SetupEffect14Keypad()
 {
-	const char* baseLayer = "animations/Effect14_Keypad.chroma";
+	const char* baseLayer = "Animations/Effect14_Keypad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	ChromaAnimationAPI::ReduceFramesName(baseLayer, 2);
@@ -1659,7 +1661,7 @@ void SetupEffect14Keypad()
 }
 void SetupEffect15Keyboard()
 {
-	const char* baseLayer = "animations/Effect15_Keyboard.chroma";
+	const char* baseLayer = "Animations/Effect15_Keyboard.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(163, 13, 13);
@@ -1672,7 +1674,7 @@ void SetupEffect15Keyboard()
 }
 void SetupEffect15ChromaLink()
 {
-	const char* baseLayer = "animations/Effect15_ChromaLink.chroma";
+	const char* baseLayer = "Animations/Effect15_ChromaLink.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(163, 13, 13);
@@ -1683,7 +1685,7 @@ void SetupEffect15ChromaLink()
 }
 void SetupEffect15Headset()
 {
-	const char* baseLayer = "animations/Effect15_Headset.chroma";
+	const char* baseLayer = "Animations/Effect15_Headset.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(163, 13, 13);
@@ -1694,7 +1696,7 @@ void SetupEffect15Headset()
 }
 void SetupEffect15Mousepad()
 {
-	const char* baseLayer = "animations/Effect15_Mousepad.chroma";
+	const char* baseLayer = "Animations/Effect15_Mousepad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(163, 13, 13);
@@ -1705,7 +1707,7 @@ void SetupEffect15Mousepad()
 }
 void SetupEffect15Mouse()
 {
-	const char* baseLayer = "animations/Effect15_Mouse.chroma";
+	const char* baseLayer = "Animations/Effect15_Mouse.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(163, 13, 13);
@@ -1716,7 +1718,7 @@ void SetupEffect15Mouse()
 }
 void SetupEffect15Keypad()
 {
-	const char* baseLayer = "animations/Effect15_Keypad.chroma";
+	const char* baseLayer = "Animations/Effect15_Keypad.chroma";
 	ChromaAnimationAPI::CloseAnimationName(baseLayer);
 	ChromaAnimationAPI::GetAnimation(baseLayer);
 	int color1 = ChromaAnimationAPI::GetRGB(163, 13, 13);
@@ -1735,7 +1737,7 @@ void SetupEffect16Keyboard() {
 	ChromaAnimationAPI::SetChromaCustomFlagName(baseLayer, true);
 	ChromaAnimationAPI::SetChromaCustomColorAllFramesName(baseLayer);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 1);
+	SetupEvent(baseLayer, 16);
 }
 void SetupEffect16ChromaLink() {
 	const char* baseLayer = "Animations/Effect16_ChromaLink.chroma";
@@ -1745,7 +1747,7 @@ void SetupEffect16ChromaLink() {
 	int color2 = ChromaAnimationAPI::GetRGB(255, 0, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 1);
+	SetupEvent(baseLayer, 16);
 }
 void SetupEffect16Headset() {
 	const char* baseLayer = "Animations/Effect16_Headset.chroma";
@@ -1755,7 +1757,7 @@ void SetupEffect16Headset() {
 	int color2 = ChromaAnimationAPI::GetRGB(255, 0, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 1);
+	SetupEvent(baseLayer, 16);
 }
 void SetupEffect16Mousepad() {
 	const char* baseLayer = "Animations/Effect16_Mousepad.chroma";
@@ -1765,7 +1767,7 @@ void SetupEffect16Mousepad() {
 	int color2 = ChromaAnimationAPI::GetRGB(255, 0, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 1);
+	SetupEvent(baseLayer, 16);
 }
 void SetupEffect16Mouse() {
 	const char* baseLayer = "Animations/Effect16_Mouse.chroma";
@@ -1775,7 +1777,7 @@ void SetupEffect16Mouse() {
 	int color2 = ChromaAnimationAPI::GetRGB(255, 0, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 1);
+	SetupEvent(baseLayer, 16);
 }
 void SetupEffect16Keypad() {
 	const char* baseLayer = "Animations/Effect16_Keypad.chroma";
@@ -1785,7 +1787,7 @@ void SetupEffect16Keypad() {
 	int color2 = ChromaAnimationAPI::GetRGB(255, 0, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 1);
+	SetupEvent(baseLayer, 16);
 }
 void SetupEffect17Keyboard() {
 	const char* baseLayer = "Animations/Effect17_Keyboard.chroma";
@@ -1797,7 +1799,7 @@ void SetupEffect17Keyboard() {
 	ChromaAnimationAPI::SetChromaCustomFlagName(baseLayer, true);
 	ChromaAnimationAPI::SetChromaCustomColorAllFramesName(baseLayer);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 2);
+	SetupEvent(baseLayer, 17);
 }
 void SetupEffect17ChromaLink() {
 	const char* baseLayer = "Animations/Effect17_ChromaLink.chroma";
@@ -1807,7 +1809,7 @@ void SetupEffect17ChromaLink() {
 	int color2 = ChromaAnimationAPI::GetRGB(0, 255, 255);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 2);
+	SetupEvent(baseLayer, 17);
 }
 void SetupEffect17Headset() {
 	const char* baseLayer = "Animations/Effect17_Headset.chroma";
@@ -1817,7 +1819,7 @@ void SetupEffect17Headset() {
 	int color2 = ChromaAnimationAPI::GetRGB(0, 255, 255);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 2);
+	SetupEvent(baseLayer, 17);
 }
 void SetupEffect17Mousepad() {
 	const char* baseLayer = "Animations/Effect17_Mousepad.chroma";
@@ -1827,7 +1829,7 @@ void SetupEffect17Mousepad() {
 	int color2 = ChromaAnimationAPI::GetRGB(0, 255, 255);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 2);
+	SetupEvent(baseLayer, 17);
 }
 void SetupEffect17Mouse() {
 	const char* baseLayer = "Animations/Effect17_Mouse.chroma";
@@ -1837,7 +1839,7 @@ void SetupEffect17Mouse() {
 	int color2 = ChromaAnimationAPI::GetRGB(0, 255, 255);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 2);
+	SetupEvent(baseLayer, 17);
 }
 void SetupEffect17Keypad() {
 	const char* baseLayer = "Animations/Effect17_Keypad.chroma";
@@ -1847,7 +1849,7 @@ void SetupEffect17Keypad() {
 	int color2 = ChromaAnimationAPI::GetRGB(0, 255, 255);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 2);
+	SetupEvent(baseLayer, 17);
 }
 void SetupEffect18Keyboard() {
 	const char* baseLayer = "Animations/Blank_Keyboard.chroma";
@@ -1860,7 +1862,7 @@ void SetupEffect18Keyboard() {
 	ChromaAnimationAPI::SetChromaCustomFlagName(baseLayer, true);
 	ChromaAnimationAPI::SetChromaCustomColorAllFramesName(baseLayer);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 3);
+	SetupEvent(baseLayer, 18);
 }
 void SetupEffect18ChromaLink() {
 	const char* baseLayer = "Animations/Blank_ChromaLink.chroma";
@@ -1871,7 +1873,7 @@ void SetupEffect18ChromaLink() {
 	ChromaAnimationAPI::FadeStartFramesName(baseLayer, 10);
 	ChromaAnimationAPI::FadeEndFramesName(baseLayer, frameCount - 10);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 3);
+	SetupEvent(baseLayer, 18);
 }
 void SetupEffect18Headset() {
 	const char* baseLayer = "Animations/Blank_Headset.chroma";
@@ -1882,7 +1884,7 @@ void SetupEffect18Headset() {
 	ChromaAnimationAPI::FadeStartFramesName(baseLayer, 10);
 	ChromaAnimationAPI::FadeEndFramesName(baseLayer, frameCount - 10);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 3);
+	SetupEvent(baseLayer, 18);
 }
 void SetupEffect18Mousepad() {
 	const char* baseLayer = "Animations/Blank_Mousepad.chroma";
@@ -1893,7 +1895,7 @@ void SetupEffect18Mousepad() {
 	ChromaAnimationAPI::FadeStartFramesName(baseLayer, 10);
 	ChromaAnimationAPI::FadeEndFramesName(baseLayer, frameCount - 10);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 3);
+	SetupEvent(baseLayer, 18);
 }
 void SetupEffect18Mouse() {
 	const char* baseLayer = "Animations/Blank_Mouse.chroma";
@@ -1904,7 +1906,7 @@ void SetupEffect18Mouse() {
 	ChromaAnimationAPI::FadeStartFramesName(baseLayer, 10);
 	ChromaAnimationAPI::FadeEndFramesName(baseLayer, frameCount - 10);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 3);
+	SetupEvent(baseLayer, 18);
 }
 void SetupEffect18Keypad() {
 	const char* baseLayer = "Animations/Blank_Keypad.chroma";
@@ -1915,7 +1917,7 @@ void SetupEffect18Keypad() {
 	ChromaAnimationAPI::FadeStartFramesName(baseLayer, 10);
 	ChromaAnimationAPI::FadeEndFramesName(baseLayer, frameCount - 10);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 3);
+	SetupEvent(baseLayer, 18);
 }
 void SetupEffect19Keyboard() {
 	const char* baseLayer = "Animations/Blank_Keyboard.chroma";
@@ -1932,7 +1934,7 @@ void SetupEffect19Keyboard() {
 	ChromaAnimationAPI::SetChromaCustomFlagName(baseLayer, true);
 	ChromaAnimationAPI::SetChromaCustomColorAllFramesName(baseLayer);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 4);
+	SetupEvent(baseLayer, 19);
 }
 void SetupEffect19ChromaLink() {
 	const char* baseLayer = "Animations/Blank_ChromaLink.chroma";
@@ -1947,7 +1949,7 @@ void SetupEffect19ChromaLink() {
 	int color2 = ChromaAnimationAPI::GetRGB(255, 255, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 4);
+	SetupEvent(baseLayer, 19);
 }
 void SetupEffect19Headset() {
 	const char* baseLayer = "Animations/Blank_Headset.chroma";
@@ -1962,7 +1964,7 @@ void SetupEffect19Headset() {
 	int color2 = ChromaAnimationAPI::GetRGB(255, 255, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 4);
+	SetupEvent(baseLayer, 19);
 }
 void SetupEffect19Mousepad() {
 	const char* baseLayer = "Animations/Blank_Mousepad.chroma";
@@ -1977,7 +1979,7 @@ void SetupEffect19Mousepad() {
 	int color2 = ChromaAnimationAPI::GetRGB(255, 255, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 4);
+	SetupEvent(baseLayer, 19);
 }
 void SetupEffect19Mouse() {
 	const char* baseLayer = "Animations/Blank_Mouse.chroma";
@@ -1992,7 +1994,7 @@ void SetupEffect19Mouse() {
 	int color2 = ChromaAnimationAPI::GetRGB(255, 255, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 4);
+	SetupEvent(baseLayer, 19);
 }
 void SetupEffect19Keypad() {
 	const char* baseLayer = "Animations/Blank_Keypad.chroma";
@@ -2007,7 +2009,7 @@ void SetupEffect19Keypad() {
 	int color2 = ChromaAnimationAPI::GetRGB(255, 255, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 4);
+	SetupEvent(baseLayer, 19);
 }
 void SetupEffect20Keyboard() {
 	const char* baseLayer = "Animations/Blank_Keyboard.chroma";
@@ -2020,7 +2022,7 @@ void SetupEffect20Keyboard() {
 	ChromaAnimationAPI::SetChromaCustomFlagName(baseLayer, true);
 	ChromaAnimationAPI::SetChromaCustomColorAllFramesName(baseLayer);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 5);
+	SetupEvent(baseLayer, 20);
 }
 void SetupEffect20ChromaLink() {
 	const char* baseLayer = "Animations/Blank_ChromaLink.chroma";
@@ -2031,7 +2033,7 @@ void SetupEffect20ChromaLink() {
 	ChromaAnimationAPI::FadeStartFramesName(baseLayer, 10);
 	ChromaAnimationAPI::FadeEndFramesName(baseLayer, frameCount - 10);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 5);
+	SetupEvent(baseLayer, 20);
 }
 void SetupEffect20Headset() {
 	const char* baseLayer = "Animations/Blank_Headset.chroma";
@@ -2042,7 +2044,7 @@ void SetupEffect20Headset() {
 	ChromaAnimationAPI::FadeStartFramesName(baseLayer, 10);
 	ChromaAnimationAPI::FadeEndFramesName(baseLayer, frameCount - 10);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 5);
+	SetupEvent(baseLayer, 20);
 }
 void SetupEffect20Mousepad() {
 	const char* baseLayer = "Animations/Blank_Mousepad.chroma";
@@ -2053,7 +2055,7 @@ void SetupEffect20Mousepad() {
 	ChromaAnimationAPI::FadeStartFramesName(baseLayer, 10);
 	ChromaAnimationAPI::FadeEndFramesName(baseLayer, frameCount - 10);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 5);
+	SetupEvent(baseLayer, 20);
 }
 void SetupEffect20Mouse() {
 	const char* baseLayer = "Animations/Blank_Mouse.chroma";
@@ -2064,7 +2066,7 @@ void SetupEffect20Mouse() {
 	ChromaAnimationAPI::FadeStartFramesName(baseLayer, 10);
 	ChromaAnimationAPI::FadeEndFramesName(baseLayer, frameCount - 10);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 5);
+	SetupEvent(baseLayer, 20);
 }
 void SetupEffect20Keypad() {
 	const char* baseLayer = "Animations/Blank_Keypad.chroma";
@@ -2075,7 +2077,7 @@ void SetupEffect20Keypad() {
 	ChromaAnimationAPI::FadeStartFramesName(baseLayer, 10);
 	ChromaAnimationAPI::FadeEndFramesName(baseLayer, frameCount - 10);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 5);
+	SetupEvent(baseLayer, 20);
 }
 void SetupEffect21Keyboard() {
 	const char* baseLayer = "Animations/Effect21_Keyboard.chroma";
@@ -2087,7 +2089,7 @@ void SetupEffect21Keyboard() {
 	ChromaAnimationAPI::SetChromaCustomFlagName(baseLayer, true);
 	ChromaAnimationAPI::SetChromaCustomColorAllFramesName(baseLayer);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 6);
+	SetupEvent(baseLayer, 21);
 }
 void SetupEffect21ChromaLink() {
 	const char* baseLayer = "Animations/Effect21_ChromaLink.chroma";
@@ -2097,7 +2099,7 @@ void SetupEffect21ChromaLink() {
 	int color2 = ChromaAnimationAPI::GetRGB(255, 255, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 6);
+	SetupEvent(baseLayer, 21);
 }
 void SetupEffect21Headset() {
 	const char* baseLayer = "Animations/Effect21_Headset.chroma";
@@ -2107,7 +2109,7 @@ void SetupEffect21Headset() {
 	int color2 = ChromaAnimationAPI::GetRGB(255, 255, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 6);
+	SetupEvent(baseLayer, 21);
 }
 void SetupEffect21Mousepad() {
 	const char* baseLayer = "Animations/Effect21_Mousepad.chroma";
@@ -2117,7 +2119,7 @@ void SetupEffect21Mousepad() {
 	int color2 = ChromaAnimationAPI::GetRGB(255, 255, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 6);
+	SetupEvent(baseLayer, 21);
 }
 void SetupEffect21Mouse() {
 	const char* baseLayer = "Animations/Effect21_Mouse.chroma";
@@ -2127,7 +2129,7 @@ void SetupEffect21Mouse() {
 	int color2 = ChromaAnimationAPI::GetRGB(255, 255, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 6);
+	SetupEvent(baseLayer, 21);
 }
 void SetupEffect21Keypad() {
 	const char* baseLayer = "Animations/Effect21_Keypad.chroma";
@@ -2137,7 +2139,7 @@ void SetupEffect21Keypad() {
 	int color2 = ChromaAnimationAPI::GetRGB(255, 255, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 6);
+	SetupEvent(baseLayer, 21);
 }
 void SetupEffect22Keyboard() {
 	const char* baseLayer = "Animations/Effect22_Keyboard.chroma";
@@ -2149,7 +2151,7 @@ void SetupEffect22Keyboard() {
 	ChromaAnimationAPI::SetChromaCustomFlagName(baseLayer, true);
 	ChromaAnimationAPI::SetChromaCustomColorAllFramesName(baseLayer);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 7);
+	SetupEvent(baseLayer, 22);
 }
 void SetupEffect22ChromaLink() {
 	const char* baseLayer = "Animations/Effect22_ChromaLink.chroma";
@@ -2159,7 +2161,7 @@ void SetupEffect22ChromaLink() {
 	int color2 = ChromaAnimationAPI::GetRGB(255, 255, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 7);
+	SetupEvent(baseLayer, 22);
 }
 void SetupEffect22Headset() {
 	const char* baseLayer = "Animations/Effect22_Headset.chroma";
@@ -2169,7 +2171,7 @@ void SetupEffect22Headset() {
 	int color2 = ChromaAnimationAPI::GetRGB(255, 255, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 7);
+	SetupEvent(baseLayer, 22);
 }
 void SetupEffect22Mousepad() {
 	const char* baseLayer = "Animations/Effect22_Mousepad.chroma";
@@ -2179,7 +2181,7 @@ void SetupEffect22Mousepad() {
 	int color2 = ChromaAnimationAPI::GetRGB(255, 255, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 7);
+	SetupEvent(baseLayer, 22);
 }
 void SetupEffect22Mouse() {
 	const char* baseLayer = "Animations/Effect22_Mouse.chroma";
@@ -2189,7 +2191,7 @@ void SetupEffect22Mouse() {
 	int color2 = ChromaAnimationAPI::GetRGB(255, 255, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 7);
+	SetupEvent(baseLayer, 22);
 }
 void SetupEffect22Keypad() {
 	const char* baseLayer = "Animations/Effect22_Keypad.chroma";
@@ -2199,7 +2201,7 @@ void SetupEffect22Keypad() {
 	int color2 = ChromaAnimationAPI::GetRGB(255, 255, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 7);
+	SetupEvent(baseLayer, 22);
 }
 void SetupEffect23Keyboard() {
 	const char* baseLayer = "Animations/Effect23_Keyboard.chroma";
@@ -2211,7 +2213,7 @@ void SetupEffect23Keyboard() {
 	ChromaAnimationAPI::SetChromaCustomFlagName(baseLayer, true);
 	ChromaAnimationAPI::SetChromaCustomColorAllFramesName(baseLayer);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 8);
+	SetupEvent(baseLayer, 23);
 }
 void SetupEffect23ChromaLink() {
 	const char* baseLayer = "Animations/Effect23_ChromaLink.chroma";
@@ -2221,7 +2223,7 @@ void SetupEffect23ChromaLink() {
 	int color2 = ChromaAnimationAPI::GetRGB(0, 255, 255);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 8);
+	SetupEvent(baseLayer, 23);
 }
 void SetupEffect23Headset() {
 	const char* baseLayer = "Animations/Effect23_Headset.chroma";
@@ -2231,7 +2233,7 @@ void SetupEffect23Headset() {
 	int color2 = ChromaAnimationAPI::GetRGB(0, 255, 255);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 8);
+	SetupEvent(baseLayer, 23);
 }
 void SetupEffect23Mousepad() {
 	const char* baseLayer = "Animations/Effect23_Mousepad.chroma";
@@ -2241,7 +2243,7 @@ void SetupEffect23Mousepad() {
 	int color2 = ChromaAnimationAPI::GetRGB(0, 255, 255);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 8);
+	SetupEvent(baseLayer, 23);
 }
 void SetupEffect23Mouse() {
 	const char* baseLayer = "Animations/Effect23_Mouse.chroma";
@@ -2251,7 +2253,7 @@ void SetupEffect23Mouse() {
 	int color2 = ChromaAnimationAPI::GetRGB(0, 255, 255);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 8);
+	SetupEvent(baseLayer, 23);
 }
 void SetupEffect23Keypad() {
 	const char* baseLayer = "Animations/Effect23_Keypad.chroma";
@@ -2261,7 +2263,7 @@ void SetupEffect23Keypad() {
 	int color2 = ChromaAnimationAPI::GetRGB(0, 255, 255);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 8);
+	SetupEvent(baseLayer, 23);
 }
 void SetupEffect24Keyboard() {
 	const char* baseLayer = "Animations/Effect24_Keyboard.chroma";
@@ -2273,7 +2275,7 @@ void SetupEffect24Keyboard() {
 	ChromaAnimationAPI::SetChromaCustomFlagName(baseLayer, true);
 	ChromaAnimationAPI::SetChromaCustomColorAllFramesName(baseLayer);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 9);
+	SetupEvent(baseLayer, 24);
 }
 void SetupEffect24ChromaLink() {
 	const char* baseLayer = "Animations/Effect24_ChromaLink.chroma";
@@ -2283,7 +2285,7 @@ void SetupEffect24ChromaLink() {
 	int color2 = ChromaAnimationAPI::GetRGB(127, 0, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 9);
+	SetupEvent(baseLayer, 24);
 }
 void SetupEffect24Headset() {
 	const char* baseLayer = "Animations/Effect24_Headset.chroma";
@@ -2293,7 +2295,7 @@ void SetupEffect24Headset() {
 	int color2 = ChromaAnimationAPI::GetRGB(127, 0, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 9);
+	SetupEvent(baseLayer, 24);
 }
 void SetupEffect24Mousepad() {
 	const char* baseLayer = "Animations/Effect24_Mousepad.chroma";
@@ -2303,7 +2305,7 @@ void SetupEffect24Mousepad() {
 	int color2 = ChromaAnimationAPI::GetRGB(127, 0, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 9);
+	SetupEvent(baseLayer, 24);
 }
 void SetupEffect24Mouse() {
 	const char* baseLayer = "Animations/Effect24_Mouse.chroma";
@@ -2313,7 +2315,7 @@ void SetupEffect24Mouse() {
 	int color2 = ChromaAnimationAPI::GetRGB(127, 0, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 9);
+	SetupEvent(baseLayer, 24);
 }
 void SetupEffect24Keypad() {
 	const char* baseLayer = "Animations/Effect24_Keypad.chroma";
@@ -2323,7 +2325,7 @@ void SetupEffect24Keypad() {
 	int color2 = ChromaAnimationAPI::GetRGB(127, 0, 0);
 	ChromaAnimationAPI::MultiplyTargetColorLerpAllFramesName(baseLayer, color1, color2);
 	ChromaAnimationAPI::OverrideFrameDurationName(baseLayer, 0.033f);
-	SetupEvent(baseLayer, 9);
+	SetupEvent(baseLayer, 24);
 }
 #pragma endregion
 
