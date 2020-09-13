@@ -35,3 +35,7 @@ client.connect <SERVER_IP_ADDRESS>:28015
 * Streamers can broadcast their Chroma RGB lighting to viewers with [Razer Chroma RGB for Streamers](https://www.microsoft.com/store/apps/9PG8DNKL06M6)
 
 ![image_2](images/image_2.png)
+
+## Support
+
+Contact `Tim Graupmann#0611` on Discord for support.
