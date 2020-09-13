@@ -2605,7 +2605,7 @@ void BlendAnimation1D(DeviceFrameIndex& deviceFrameIndex, int device, EChromaSDK
 	if (frameId < frameCount)
 	{
 		ChromaAnimationAPI::SetCurrentFrameName(animationName, frameId);
-		cout << animationName << ": " << (1 + ChromaAnimationAPI::GetCurrentFrameName(animationName)) << " of " << frameCount << endl;
+		//cout << animationName << ": " << (1 + ChromaAnimationAPI::GetCurrentFrameName(animationName)) << " of " << frameCount << endl;
 		float duration;
 		int animationId = ChromaAnimationAPI::GetAnimation(animationName);
 		ChromaAnimationAPI::GetFrame(animationId, frameId, &duration, tempColors, size);
@@ -2633,7 +2633,7 @@ void BlendAnimation2D(DeviceFrameIndex& deviceFrameIndex, int device, EChromaSDK
 	if (frameId < frameCount)
 	{
 		ChromaAnimationAPI::SetCurrentFrameName(animationName, frameId);
-		cout << animationName << ": " << (1 + ChromaAnimationAPI::GetCurrentFrameName(animationName)) << " of " << frameCount << endl;
+		//cout << animationName << ": " << (1 + ChromaAnimationAPI::GetCurrentFrameName(animationName)) << " of " << frameCount << endl;
 		float duration;
 		int animationId = ChromaAnimationAPI::GetAnimation(animationName);
 		ChromaAnimationAPI::GetFrame(animationId, frameId, &duration, tempColors, size);
@@ -2905,7 +2905,7 @@ void GameLoop()
 	int animationIdMouse = ChromaAnimationAPI::GetAnimation(ANIMATION_FINAL_MOUSE);
 	int animationIdMousepad = ChromaAnimationAPI::GetAnimation(ANIMATION_FINAL_MOUSEPAD);
 
-	int ambientColor = ChromaAnimationAPI::GetRGB(4, 4, 2);
+	int ambientColor = ChromaAnimationAPI::GetRGB(25, 37, 50);
 
 	while (_sWaitForExit)
 	{
