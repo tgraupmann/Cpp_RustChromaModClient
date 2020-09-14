@@ -333,7 +333,27 @@ void GetServerPlayer()
 						if (!dataEvent.empty())
 						{
 							cout << "Player Event: event=" << dataEvent << endl;
-							if (!strcmp(dataEvent.c_str(), "OnPlayerAttack"))
+							if (!strcmp(dataEvent.c_str(), "OnPlayerRespawn"))
+							{
+								QueueAnimation(2);
+							}
+							else if (!strcmp(dataEvent.c_str(), "OnActiveItemChanged"))
+							{
+								string hitEntity = evt["new_item"].asString();
+								if (!strcmp(hitEntity.c_str(), "Rock"))
+								{
+									QueueAnimation(3);
+								}
+								else if (!strcmp(hitEntity.c_str(), "Torch"))
+								{
+									QueueAnimation(4);
+								}
+								else
+								{
+									QueueAnimation(17);
+								}
+							}
+							else if (!strcmp(dataEvent.c_str(), "OnPlayerAttack"))
 							{
 								string activeItem = evt["active_item"].asString();
 								if (!strcmp(activeItem.c_str(), "Stone Hatchet") ||
@@ -362,20 +382,12 @@ void GetServerPlayer()
 									}
 								}								
 							}
-							else if (!strcmp(dataEvent.c_str(), "OnActiveItemChanged"))
+							else if (!strcmp(dataEvent.c_str(), "OnItemUse"))
 							{
-								string hitEntity = evt["new_item"].asString();
-								if (!strcmp(hitEntity.c_str(), "Rock"))
+								string item = evt["item"].asString();
+								if (!strcmp(item.c_str(), "Torch"))
 								{
-									QueueAnimation(3);
-								}
-								else if (!strcmp(hitEntity.c_str(), "Torch"))
-								{
-									QueueAnimation(4);
-								}
-								else
-								{
-									QueueAnimation(17);
+									QueueAnimation(9);
 								}
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnMessagePlayer"))
