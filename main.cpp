@@ -335,11 +335,32 @@ void GetServerPlayer()
 							cout << "Player Event: event=" << dataEvent << endl;
 							if (!strcmp(dataEvent.c_str(), "OnPlayerAttack"))
 							{
-								string hitEntity = evt["hit_entity"].asString();
-								if (!strcmp(hitEntity.c_str(), "TreeEntity"))
+								string activeItem = evt["active_item"].asString();
+								if (!strcmp(activeItem.c_str(), "Stone Hatchet") ||
+									!strcmp(activeItem.c_str(), "Salvaged Axe"))
 								{
-									QueueAnimation(8);
+									string hitEntity = evt["hit_entity"].asString();
+									if (!strcmp(hitEntity.c_str(), "OreResourceEntity"))
+									{
+										QueueAnimation(7);
+									}
+									else if (!strcmp(hitEntity.c_str(), "TreeEntity"))
+									{
+										QueueAnimation(8);
+									}
 								}
+								if (!strcmp(activeItem.c_str(), "Rock"))
+								{
+									string hitEntity = evt["hit_entity"].asString();
+									if (!strcmp(hitEntity.c_str(), "OreResourceEntity"))
+									{
+										QueueAnimation(6);
+									}
+									else if (!strcmp(hitEntity.c_str(), "TreeEntity"))
+									{
+										QueueAnimation(5);
+									}
+								}								
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnActiveItemChanged"))
 							{
