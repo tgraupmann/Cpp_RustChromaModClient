@@ -44,6 +44,14 @@ This is the C++ RUST Chroma Mod Client.
 
 * Switch Active Items
 
+* Note: Use Torch / Climb didn't have event hooks...
+
+![image_3](images/image_3.png)
+![image_4](images/image_4.png)
+![image_5](images/image_5.png)
+![image_6](images/image_6.png)
+![image_7](images/image_7.png)
+
 
 # Setup
 
