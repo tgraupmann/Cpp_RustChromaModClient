@@ -364,7 +364,19 @@ void GetServerPlayer()
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnActiveItemChanged"))
 							{
-								QueueAnimation(17);
+								string hitEntity = evt["new_item"].asString();
+								if (!strcmp(hitEntity.c_str(), "Rock"))
+								{
+									QueueAnimation(3);
+								}
+								else if (!strcmp(hitEntity.c_str(), "Torch"))
+								{
+									QueueAnimation(4);
+								}
+								else
+								{
+									QueueAnimation(17);
+								}
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnMessagePlayer"))
 							{
