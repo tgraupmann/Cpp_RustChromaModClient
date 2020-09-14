@@ -343,30 +343,30 @@ void GetServerPlayer()
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnActiveItemChanged"))
 							{
-								QueueAnimation(2);
+								QueueAnimation(17);
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnMessagePlayer"))
 							{
 								if (!strcmp(dataMessage.c_str(), "Can't afford to place!"))
 								{
-									QueueAnimation(3);
+									QueueAnimation(18);
 								}
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnMeleeThrown"))
 							{
-								QueueAnimation(4);
+								QueueAnimation(19);
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnPlayerJump"))
 							{
-								QueueAnimation(5);
+								QueueAnimation(20);
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnPlayerDuck"))
 							{
-								QueueAnimation(6);
+								QueueAnimation(21);
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnPlayerSprint"))
 							{
-								QueueAnimation(7);
+								QueueAnimation(22);
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnPlayerConnected"))
 							{
@@ -378,7 +378,7 @@ void GetServerPlayer()
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnPlayerDeath"))
 							{
-								QueueAnimation(9);
+								QueueAnimation(24);
 							}
 						}
 					}
