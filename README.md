@@ -4,7 +4,46 @@ This is the C++ RUST Chroma Mod Client.
 
 ![image_1](images/image_1.png)
 
+# Installer
+
 * [Rust Chroma Mod Client - Windows 32-bit Installer](https://github.com/tgraupmann/Cpp_RustChromaModClient/releases/tag/1.0)
+
+# Chroma Effects
+
+* Keyboard hotkeys
+
+* Sprint
+
+* Jump
+
+* Duck
+
+* Player Respawn
+
+* Player Death
+
+* Player Connected/Disconnected
+
+* Fire Crossbow
+
+* Hit Rock with Rock
+
+* Hit Tree with Rock
+
+* Hit Rock with Hatchet
+
+* Hit Hatchet on Corpse
+
+* Throw Spear
+
+* On Loot
+
+* Switch to Torch
+
+* Switch to Rock
+
+* Switch active items
+
 
 # Setup
 
