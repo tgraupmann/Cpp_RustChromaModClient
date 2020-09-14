@@ -10,7 +10,7 @@ This is the C++ RUST Chroma Mod Client.
 
 # Chroma Effects
 
-* Keyboard hotkeys
+* Keyboard Hotkeys
 
 * Sprint
 
@@ -42,7 +42,7 @@ This is the C++ RUST Chroma Mod Client.
 
 * Switch to Rock
 
-* Switch active items
+* Switch Active Items
 
 
 # Setup
