@@ -8,6 +8,12 @@ This is the C++ RUST Chroma Mod Client.
 
 * [Rust Chroma Mod Client - Windows 32-bit Installer](https://github.com/tgraupmann/Cpp_RustChromaModClient/releases/tag/1.0)
 
+## Videos ##
+
+**Intro Video**
+
+<a target="_blank" href="https://youtu.be/vClYZPl0dhY"><img src="https://img.youtube.com/vi/vClYZPl0dhY/0.jpg"></a>
+
 # Chroma Effects
 
 * Keyboard Hotkeys
