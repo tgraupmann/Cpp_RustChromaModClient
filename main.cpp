@@ -298,7 +298,7 @@ void GetServerPlayer()
 				curl_easy_setopt(curl, CURLOPT_HEADERDATA, &header_string);
 
 				curl_easy_perform(curl);
-				//cout << "Response: player.json ===" << endl << response_string << endl;
+				cout << "Response: player.json ===" << endl << response_string << endl;
 				curl_easy_cleanup(curl);
 				curl_global_cleanup();
 				curl = NULL;
@@ -335,7 +335,11 @@ void GetServerPlayer()
 							cout << "Player Event: event=" << dataEvent << endl;
 							if (!strcmp(dataEvent.c_str(), "OnPlayerAttack"))
 							{
-								QueueAnimation(1);
+								string hitEntity = evt["hit_entity"].asString();
+								if (!strcmp(hitEntity.c_str(), "TreeEntity"))
+								{
+									QueueAnimation(8);
+								}
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnActiveItemChanged"))
 							{
@@ -2949,7 +2953,8 @@ void GameLoop()
 		ChromaAnimationAPI::PreviewFrameName(ANIMATION_FINAL_MOUSE, 0);
 		ChromaAnimationAPI::PreviewFrameName(ANIMATION_FINAL_MOUSEPAD, 0);
 
-		Sleep(33); //30 FPS
+		//Sleep(33); //30 FPS
+		Sleep(100); //10 FPS
 	}
 	delete[] colorsChromaLink;
 	delete[] colorsHeadset;
