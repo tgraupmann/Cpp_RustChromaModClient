@@ -2698,9 +2698,24 @@ void BlendAnimation1D(DeviceFrameIndex& deviceFrameIndex, int device, EChromaSDK
 			int tempGreen = (tempColor & 0xFF00) >> 8;
 			int tempBlue = (tempColor & 0xFF0000) >> 16;
 
+			// add colors
+			/*
 			int red = (oldRed + tempRed) % 255;
 			int green = (oldGreen + tempGreen) % 255;
 			int blue = (oldGreen + tempBlue) % 255;
+			*/
+
+			// Use max R G B component
+			/*
+			int red = max(oldRed, tempRed);
+			int green = max(oldGreen, tempGreen);
+			int blue = max(oldGreen, tempBlue);
+			*/
+
+			// average R G B components
+			int red = (oldRed + tempRed) / 2;
+			int green = (oldGreen + tempGreen) / 2;
+			int blue = (oldGreen + tempBlue) / 2;
 
 			colors[i] = red | (green << 8) | (blue << 16);
 		}
@@ -2737,9 +2752,24 @@ void BlendAnimation2D(DeviceFrameIndex& deviceFrameIndex, int device, EChromaSDK
 			int tempGreen = (tempColor & 0xFF00) >> 8;
 			int tempBlue = (tempColor & 0xFF0000) >> 16;
 
+			// add colors
+			/*
 			int red = (oldRed + tempRed) % 255;
 			int green = (oldGreen + tempGreen) % 255;
 			int blue = (oldGreen + tempBlue) % 255;
+			*/
+
+			// Use max R G B component
+			/*
+			int red = max(oldRed, tempRed);
+			int green = max(oldGreen, tempGreen);
+			int blue = max(oldGreen, tempBlue);
+			*/
+
+			// average R G B components
+			int red = (oldRed + tempRed) / 2;
+			int green = (oldGreen + tempGreen) / 2;
+			int blue = (oldGreen + tempBlue) / 2;
 
 			colors[i] = red | (green << 8) | (blue << 16);
 		}
