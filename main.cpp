@@ -356,10 +356,14 @@ void GetServerPlayer()
 							else if (!strcmp(dataEvent.c_str(), "OnPlayerAttack"))
 							{
 								string activeItem = evt["active_item"].asString();
-								if (!strcmp(activeItem.c_str(), "Stone Hatchet") ||
+								string hitEntity = evt["hit_entity"].asString();
+								if (!strcmp(hitEntity.c_str(), "LootContainer"))
+								{
+									QueueAnimation(12);
+								}
+								else if (!strcmp(activeItem.c_str(), "Stone Hatchet") ||
 									!strcmp(activeItem.c_str(), "Salvaged Axe"))
 								{
-									string hitEntity = evt["hit_entity"].asString();
 									if (!strcmp(hitEntity.c_str(), "OreResourceEntity"))
 									{
 										QueueAnimation(7);
@@ -369,9 +373,8 @@ void GetServerPlayer()
 										QueueAnimation(8);
 									}
 								}
-								if (!strcmp(activeItem.c_str(), "Rock"))
+								else if (!strcmp(activeItem.c_str(), "Rock"))
 								{
-									string hitEntity = evt["hit_entity"].asString();
 									if (!strcmp(hitEntity.c_str(), "OreResourceEntity"))
 									{
 										QueueAnimation(6);
@@ -380,7 +383,7 @@ void GetServerPlayer()
 									{
 										QueueAnimation(5);
 									}
-								}								
+								}
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnItemUse"))
 							{
@@ -389,6 +392,10 @@ void GetServerPlayer()
 								{
 									QueueAnimation(9);
 								}
+							}
+							else if (!strcmp(dataEvent.c_str(), "OnLootEntityEnd"))
+							{
+								QueueAnimation(11);
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnMessagePlayer"))
 							{
