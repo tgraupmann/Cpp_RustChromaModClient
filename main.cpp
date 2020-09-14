@@ -361,6 +361,11 @@ void GetServerPlayer()
 								{
 									QueueAnimation(12);
 								}
+								else if (!strcmp(activeItem.c_str(), "Hatchet") &&
+									!strcmp(hitEntity.c_str(), "BaseCorpse"))
+								{
+									QueueAnimation(15);
+								}
 								else if (!strcmp(activeItem.c_str(), "Stone Hatchet") ||
 									!strcmp(activeItem.c_str(), "Salvaged Axe"))
 								{
