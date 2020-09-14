@@ -397,6 +397,22 @@ void GetServerPlayer()
 							{
 								QueueAnimation(11);
 							}
+							else if (!strcmp(dataEvent.c_str(), "OnMeleeThrown"))
+							{
+								string item = evt["item"].asString();
+								if (!strcmp(item.c_str(), "Wooden Spear"))
+								{
+									QueueAnimation(13);
+								}
+							}
+							else if (!strcmp(dataEvent.c_str(), "OnWeaponFired"))
+							{
+								string item = evt["active_item"].asString();
+								if (!strcmp(item.c_str(), "Crossbow"))
+								{
+									QueueAnimation(14);
+								}
+							}
 							else if (!strcmp(dataEvent.c_str(), "OnMessagePlayer"))
 							{
 								if (!strcmp(dataMessage.c_str(), "Can't afford to place!"))
@@ -430,7 +446,7 @@ void GetServerPlayer()
 							}
 							else if (!strcmp(dataEvent.c_str(), "OnPlayerDeath"))
 							{
-								QueueAnimation(24);
+								QueueAnimation(15);
 							}
 						}
 					}
