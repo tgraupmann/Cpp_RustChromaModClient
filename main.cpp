@@ -2688,10 +2688,21 @@ void BlendAnimation1D(DeviceFrameIndex& deviceFrameIndex, int device, EChromaSDK
 		ChromaAnimationAPI::GetFrame(animationId, frameId, &duration, tempColors, size);
 		for (int i = 0; i < size; ++i)
 		{
-			if (tempColors[i] != 0)
-			{
-				colors[i] = tempColors[i];
-			}
+			int oldColor = colors[i];
+			int oldRed = oldColor & 0xFF;
+			int oldGreen = (oldColor & 0xFF00) >> 8;
+			int oldBlue = (oldColor & 0xFF0000) >> 16;
+
+			int tempColor = tempColors[i];
+			int tempRed = tempColor & 0xFF;
+			int tempGreen = (tempColor & 0xFF00) >> 8;
+			int tempBlue = (tempColor & 0xFF0000) >> 16;
+
+			int red = (oldRed + tempRed) % 255;
+			int green = (oldGreen + tempGreen) % 255;
+			int blue = (oldGreen + tempBlue) % 255;
+
+			colors[i] = red | (green << 8) | (blue << 16);
 		}
 		deviceFrameIndex._mFrameIndex[device] = frameId + 1;
 	}
@@ -2716,10 +2727,21 @@ void BlendAnimation2D(DeviceFrameIndex& deviceFrameIndex, int device, EChromaSDK
 		ChromaAnimationAPI::GetFrame(animationId, frameId, &duration, tempColors, size);
 		for (int i = 0; i < size; ++i)
 		{
-			if (tempColors[i] != 0)
-			{
-				colors[i] = tempColors[i];
-			}
+			int oldColor = colors[i];
+			int oldRed = oldColor & 0xFF;
+			int oldGreen = (oldColor & 0xFF00) >> 8;
+			int oldBlue = (oldColor & 0xFF0000) >> 16;
+
+			int tempColor = tempColors[i];
+			int tempRed = tempColor & 0xFF;
+			int tempGreen = (tempColor & 0xFF00) >> 8;
+			int tempBlue = (tempColor & 0xFF0000) >> 16;
+
+			int red = (oldRed + tempRed) % 255;
+			int green = (oldGreen + tempGreen) % 255;
+			int blue = (oldGreen + tempBlue) % 255;
+
+			colors[i] = red | (green << 8) | (blue << 16);
 		}
 		deviceFrameIndex._mFrameIndex[device] = frameId + 1;
 	}
