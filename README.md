@@ -91,4 +91,4 @@ client.connect <SERVER_IP_ADDRESS>:28015
 
 # Support
 
-Support is available on Discord, you can reach me at "Tim Graupmann#0611".
+Support is available on Discord, you can reach me at `Tim Graupmann#0611`.
