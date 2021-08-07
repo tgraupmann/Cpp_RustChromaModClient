@@ -89,6 +89,6 @@ client.connect <SERVER_IP_ADDRESS>:28015
 
 ![image_2](images/image_2.png)
 
-## Support
+# Support
 
-Contact `Tim Graupmann#0611` on Discord for support.
+Support is available on Discord, you can reach me at "Tim Graupmann#0611".
